@@ -313,6 +313,22 @@
   .climate .cc b{font-size:13.5px}
   .climate .cc span{display:block;font-size:11.5px;color:var(--muted)}
   .climate .ct{font-family:'Fraunces';font-weight:700;color:var(--sea);white-space:nowrap}
+  /* ruta del día (Plan) */
+  .dayroute{margin-top:12px;padding-top:11px;border-top:1px solid var(--line)}
+  .dayroute .drh{display:flex;align-items:center;gap:7px;font-size:13px;margin-bottom:9px}
+  .dayroute .drh .hi{color:var(--aegean);display:grid;place-items:center}
+  .dayroute .drh .route{margin-left:auto;margin-top:0}
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .mapchip{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--sea2);background:rgba(10,61,82,.05);border:1px solid var(--line);padding:6px 10px;border-radius:9px}
+  .mapchip svg{color:var(--aegean);flex:0 0 auto}
+  /* lugares de interés extra (Info) */
+  .extra{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+  .extra:last-child{border-bottom:0}
+  .extra .xi{flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:rgba(211,154,62,.14);color:var(--gold);display:grid;place-items:center;margin-top:1px}
+  .extra .xc{flex:1;min-width:0}
+  .extra .xc b{font-size:14px}
+  .extra .xc p{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
+  .extra .xc .mapbtn{margin-top:8px}
 
   /* ---------- Más hub ---------- */
   .mtile{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;box-shadow:var(--shadow);margin-bottom:10px;cursor:pointer;font-family:inherit}
@@ -538,6 +554,63 @@ const ITIN = [
     note:'Llega a Barcelona el 03/07 ~01:00.'},
 ];
 
+/* puntos a visitar por día, para "ir al mapa" y armar la ruta del día */
+const DAY_PLACES = {
+  '21/06':{mode:'walking',pts:[
+    {n:'Plaza Sultanahmet',q:'Sultanahmet Square, Istanbul'},
+    {n:'Santa Sofía',q:'Hagia Sophia, Istanbul'},
+    {n:'Mezquita Azul',q:'Sultan Ahmed Mosque, Istanbul'},
+    {n:'Hipódromo',q:'Hippodrome of Constantinople'},
+    {n:'Cisterna Basílica',q:'Basilica Cistern, Istanbul'},
+  ]},
+  '22/06':{mode:'walking',pts:[
+    {n:'Palacio de Topkapı',q:'Topkapi Palace, Istanbul'},
+    {n:'Gran Bazar',q:'Grand Bazaar, Istanbul'},
+    {n:'Torre de Gálata',q:'Galata Tower, Istanbul'},
+    {n:'Kabataş (crucero)',q:'Kabatas, Istanbul'},
+  ]},
+  '23/06':{mode:'driving',pts:[
+    {n:'Museo al aire libre de Göreme',q:'Goreme Open Air Museum'},
+    {n:'Göreme',q:'Goreme, Cappadocia'},
+  ]},
+  '24/06':{mode:'driving',pts:[
+    {n:'Göreme (globo)',q:'Goreme, Cappadocia'},
+    {n:'Valle Rojo',q:'Red Valley, Cappadocia'},
+    {n:'Valle Rosa',q:'Rose Valley, Cappadocia'},
+    {n:'Uçhisar',q:'Uchisar Castle, Cappadocia'},
+  ]},
+  '25/06':{mode:'driving',pts:[
+    {n:'Derinkuyu',q:'Derinkuyu Underground City'},
+    {n:'Valle de Ihlara',q:'Ihlara Valley, Turkey'},
+    {n:'Valle del Amor',q:'Love Valley, Cappadocia'},
+  ]},
+  '27/06':{mode:'walking',pts:[
+    {n:'Catedral Metropolitana',q:'Metropolitan Cathedral of Athens'},
+    {n:'Ágora antigua',q:'Ancient Agora of Athens'},
+    {n:'Plaka',q:'Plaka, Athens'},
+    {n:'Monastiraki',q:'Monastiraki Square, Athens'},
+  ]},
+  '28/06':{mode:'walking',pts:[
+    {n:'Acrópolis',q:'Acropolis of Athens'},
+    {n:'Museo de la Acrópolis',q:'Acropolis Museum, Athens'},
+    {n:'Colina del Licabeto',q:'Mount Lycabettus, Athens'},
+  ]},
+  '29/06':{mode:'driving',pts:[
+    {n:'Playa Agios Prokopios',q:'Agios Prokopios Beach, Naxos'},
+    {n:'La Portara',q:'Portara, Naxos'},
+  ]},
+  '30/06':{mode:'driving',pts:[
+    {n:'Halki',q:'Halki, Naxos'},
+    {n:'Apiranthos',q:'Apeiranthos, Naxos'},
+    {n:'Chora',q:'Naxos Chora'},
+  ]},
+  '01/07':{mode:'walking',pts:[
+    {n:'Kastro (castillo)',q:'Kastro, Naxos'},
+    {n:'Playa St. George',q:'Agios Georgios Beach, Naxos'},
+    {n:'Chora',q:'Naxos Chora'},
+  ]},
+};
+
 /*SYNC:BALANCES*/
 const BALANCES = [
   {name:'Paula',toca:'823,08 €',puesto:'0,00 €',saldo:823.08,note:'su tercio de todo'},
@@ -679,48 +752,35 @@ const CLIMATE = {
   ATH:{t:'29-34°C', d:'Muy caluroso y seco. Agua y gorra.', ic:I.sun, c:'#d05a4e'},
   NAX:{t:'24-28°C', d:'Más suave por el meltemi (viento). Ideal playa.', ic:I.wind, c:'#1b8aa6'},
 };
-const ACTS = {
+/* EXTRAS: lugares complementarios que NO están en el plan (ideas si sobra tiempo) */
+const EXTRAS = {
   'Estambul':[
-    {n:'Crucero por el Bósforo',img:'act_bosforo',d:'Paseo en barco entre dos continentes. (Ya reservado con cena el 22.)'},
-    {n:'Cisterna Basílica',img:'act_cisterna',d:'Cisterna romana subterránea. ~37 €. Reservar para evitar cola (slot tarde/noche).'},
-    {n:'Mezquita Azul',img:'act_mezquita',d:'Gratis. Cubrir hombros/rodillas; pañuelo. Cerrada en horario de rezo.'},
-    {n:'Palacio de Topkapı',img:'act_topkapi',d:'Palacio otomano + Harén. Mañana entera.'},
-    {n:'Gran Bazar y Bazar Egipcio',img:'act_granbazar',d:'Compras y regateo. El Gran Bazar cierra los domingos.'},
-    {n:'Torre de Gálata',img:'act_galata',d:'~30 €. Vistas 360°. Mejor al atardecer.'},
+    {n:'Balat y Fener',d:'Barrios de casas de colores y calles fotogénicas, junto al Cuerno de Oro.',q:'Balat, Istanbul'},
+    {n:'Mezquita de Süleymaniye',d:'La más bella de la ciudad, con terrazas y vistas; mucho menos turística.',q:'Suleymaniye Mosque, Istanbul'},
+    {n:'Bazar de las Especias',d:'Colores y aromas junto a Eminönü. Más pequeño y manejable que el Gran Bazar.',q:'Spice Bazaar, Istanbul'},
+    {n:'Kadıköy (lado asiático)',d:'Mercado, cafés y ambiente local. Se cruza en ferry, una experiencia en sí.',q:'Kadikoy, Istanbul'},
+    {n:'İstiklal y Beyoğlu',d:'Avenida peatonal con el tranvía rojo, tiendas y vida nocturna.',q:'Istiklal Avenue, Istanbul'},
   ],
   'Capadocia':[
-    {n:'Globo al amanecer',img:'act_globo',d:'Lo más icónico. ~125 €/pax. (Reservado.) Sale ~05:00. Lleva abrigo.'},
-    {n:'Museo al aire libre de Göreme',img:'act_goreme',d:'Iglesias rupestres con frescos. Patrimonio UNESCO.'},
-    {n:'Valles',img:'act_valles',d:'Rojo y Rosa (atardecer), del Amor, de las Palomas. A pie o en quad.'},
-    {n:'Ciudades subterráneas',img:'act_subterranea',d:'Derinkuyu o Kaymaklı. Varios niveles bajo tierra.'},
-    {n:'Uçhisar',img:'act_uchisar',d:'Castillo natural, el punto más alto. Vistas de toda Capadocia.'},
+    {n:'Avanos',d:'Pueblo de la cerámica a orillas del río Kızılırmak. Talleres de alfarería.',q:'Avanos, Turkey'},
+    {n:'Valle de las Palomas',d:'Mirador espectacular entre Göreme y Uçhisar, lleno de palomares excavados.',q:'Pigeon Valley, Cappadocia'},
+    {n:'Çavuşin',d:'Pueblo antiguo semiabandonado con una iglesia rupestre muy fotogénica.',q:'Cavusin, Cappadocia'},
+    {n:'Ortahisar',d:'Castillo de roca y pueblo tranquilo, alternativa menos turística a Uçhisar.',q:'Ortahisar Castle, Cappadocia'},
   ],
   'Atenas':[
-    {n:'Acrópolis y Partenón',img:'act_acropolis',d:'Imprescindible. (Reservado el 28, 11:00.) Lleva agua y gorra.'},
-    {n:'Museo de la Acrópolis',img:'act_museo',d:'Moderno, junto a la colina. Imprescindible.'},
-    {n:'Ágora antigua y Plaka',img:'act_agora',d:'Barrio histórico, calles peatonales y tabernas.'},
-    {n:'Colina del Licabeto',img:'act_licabeto',d:'La vista más alta de la ciudad. Atardecer.'},
-    {n:'Cabo Sunión (opcional)',img:'act_sunion',d:'Templo de Poseidón al atardecer. Excursión de medio día.'},
+    {n:'Anafiotika',d:'Rincón de casitas blancas estilo cicládico escondido bajo la Acrópolis.',q:'Anafiotika, Athens'},
+    {n:'Mercado central (Varvakios)',d:'Mercado de carne, pescado y especias. Auténtico y muy vivo.',q:'Varvakios Agora, Athens'},
+    {n:'Barrio de Psyrri',d:'Arte urbano, bares de moda y tabernas. El Atenas más alternativo.',q:'Psiri, Athens'},
+    {n:'Estadio Panatenaico',d:'Estadio de mármol de los primeros JJOO modernos (1896).',q:'Panathenaic Stadium, Athens'},
+    {n:'Cabo Sunión',d:'Templo de Poseidón sobre el mar al atardecer. Excursión de medio día.',q:'Cape Sounion, Temple of Poseidon'},
   ],
   'Naxos':[
-    {n:'La Portara',img:'act_portara',d:'Puerta de mármol del templo de Apolo. Atardecer imperdible, junto al puerto.'},
-    {n:'Playas',img:'act_playas',d:'Agios Prokopios, Agia Anna, Plaka (arena), Mikri Vigla (kitesurf).'},
-    {n:'Pueblos de montaña',img:'act_pueblos',d:'Halki, Apiranthos (mármol), Filoti. Interior verde.'},
-    {n:'Chora (casco antiguo)',img:'act_chora',d:'Callejuelas venecianas, castillo (Kastro), tiendas y tabernas.'},
+    {n:'Monte Zas',d:'La cima más alta de las Cícladas. Ruta de senderismo con vistas enormes.',q:'Mount Zas, Naxos'},
+    {n:'Templo de Deméter',d:'Templo arcaico de mármol en pleno campo, cerca de Sangri.',q:'Temple of Demeter, Naxos'},
+    {n:'Kouros de Apollonas',d:'Estatua colosal de mármol inacabada, tumbada en una antigua cantera.',q:'Kouros of Apollonas, Naxos'},
+    {n:'Destilería de kítron (Halki)',d:'Vallindras: prueba el kítron, el licor de cidra típico de la isla.',q:'Vallindras Distillery, Halki Naxos'},
+    {n:'Mikri Vigla',d:'Playa de viento, paraíso del kitesurf y el windsurf.',q:'Mikri Vigla Beach, Naxos'},
   ],
-};
-/* búsqueda de mapa por sitio (nombre + ciudad para un pin fiable) */
-const ACT_PLACE = {
-  'Crucero por el Bósforo':'Kabataş İskelesi, Estambul','Cisterna Basílica':'Basilica Cistern, Istanbul',
-  'Mezquita Azul':'Mezquita Azul, Estambul','Palacio de Topkapı':'Topkapı Palace, Istanbul',
-  'Gran Bazar y Bazar Egipcio':'Grand Bazaar, Istanbul','Torre de Gálata':'Galata Tower, Istanbul',
-  'Globo al amanecer':'Göreme, Capadocia','Museo al aire libre de Göreme':'Göreme Open Air Museum',
-  'Valles':'Red Valley, Göreme','Ciudades subterráneas':'Derinkuyu Underground City','Uçhisar':'Uçhisar Castle',
-  'Acrópolis y Partenón':'Acrópolis de Atenas','Museo de la Acrópolis':'Acropolis Museum, Athens',
-  'Ágora antigua y Plaka':'Ancient Agora of Athens','Colina del Licabeto':'Mount Lycabettus, Athens',
-  'Cabo Sunión (opcional)':'Cape Sounion, Temple of Poseidon',
-  'La Portara':'Portara, Naxos','Playas':'Agios Prokopios Beach, Naxos','Pueblos de montaña':'Apeiranthos, Naxos',
-  'Chora (casco antiguo)':'Naxos Chora',
 };
 const FERRIES = [
   {n:'Paros',fast:'30 min',conv:'45 min',p:'~30 €'},
@@ -772,6 +832,15 @@ const eur = n => (n<0?'−':'')+Math.abs(n).toLocaleString('es-ES',{minimumFract
 const photo = (key, alt) => `<img class="ph" loading="lazy" decoding="async" src="img/${key}.jpg" alt="${alt}" onload="this.classList.add('loaded')">`;
 const mapsUrl = q => 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
 const mapBtn = (q,label) => `<a class="mapbtn" href="${mapsUrl(q)}" target="_blank" rel="noopener">${I.pin} ${label||'Ver en mapa'}</a>`;
+const dirUrl = (pts, mode) => {
+  if(!pts || pts.length<2) return null;
+  const enc = s => encodeURIComponent(s);
+  const origin=enc(pts[0].q), dest=enc(pts[pts.length-1].q);
+  const mid=pts.slice(1,-1).map(p=>enc(p.q)).join('|');
+  let u=`https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${dest}&travelmode=${mode||'walking'}`;
+  if(mid) u+=`&waypoints=${mid}`;
+  return u;
+};
 function loadState(key){try{return JSON.parse(localStorage.getItem(key))||{};}catch(e){return {};}}
 function saveState(key,obj){localStorage.setItem(key,JSON.stringify(obj));}
 const checkSVG = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
@@ -965,6 +1034,14 @@ function dayBody(d, openMeals){
   body.style.display='block'; body.style.padding='4px 0 0';
   const meal=mealByDate[d.date];
   const hotel=hotelByName[d.hotel];
+  const dp=DAY_PLACES[d.date];
+  const route=dp?dirUrl(dp.pts, dp.mode):null;
+  const routeBlock = dp ? `
+    <div class="dayroute">
+      <div class="drh"><span class="hi">${I.pin}</span><b>Puntos del día</b>
+        ${route?`<a class="mapbtn route" href="${route}" target="_blank" rel="noopener">${I.map} Ver la ruta</a>`:''}</div>
+      <div class="chips">${dp.pts.map(p=>`<a class="mapchip" href="${mapsUrl(p.q)}" target="_blank" rel="noopener">${I.pin} ${p.n}</a>`).join('')}</div>
+    </div>` : '';
   body.innerHTML=`
     <div class="slot"><div class="ic">${I.sun}</div><div class="tx"><b>Mañana</b>${d.m}</div></div>
     <div class="slot"><div class="ic">${I.noon}</div><div class="tx"><b>Tarde</b>${d.a}</div></div>
@@ -973,6 +1050,7 @@ function dayBody(d, openMeals){
     ${meal?`<div class="slot"><div class="ic">${I.food}</div><div class="tx"><b class="mealk">Comida</b>${meal.lunch}</div></div>
     <div class="slot"><div class="ic">${I.food}</div><div class="tx"><b class="mealk">Cena</b>${meal.dinner}</div></div>`:''}
     ${d.note?`<div class="daynote">${d.note}</div>`:''}
+    ${routeBlock}
     ${hotel?`<div class="hotelrow"><span class="hi">${I.bed}</span><div><b>${hotel.name}</b><div style="font-size:11.5px;color:var(--muted)">${hotel.addr}</div></div>
       <a class="ha mapbtn" style="margin-top:0" href="${mapsUrl(hotel.name+' '+hotel.addr)}" target="_blank" rel="noopener">${I.pin} Mapa</a></div>`:''}`;
   return body;
@@ -1218,16 +1296,14 @@ function renderInfo(){
   NOTES.forEach(n=>nc.appendChild(el('div','note',`<span class="ni">${I.info}</span><span>${n}</span>`)));
   v.appendChild(nc);
 
-  v.appendChild(el('div','sec-title','Qué ver en cada destino'));
-  Object.entries(ACTS).forEach(([city,arr])=>{
+  v.appendChild(el('div','sec-title','Más lugares de interés'));
+  v.appendChild(el('div','sub','Ideas que NO están en el plan, por si os sobra tiempo. Cada una con su mapa.'));
+  Object.entries(EXTRAS).forEach(([city,arr])=>{
     const c=el('div','card');
     c.appendChild(el('div','',`<div style="font-family:Fraunces;font-weight:700;font-size:16px;color:var(--sea);margin-bottom:6px">${city}</div>`));
-    arr.forEach(a=>{
-      const place=ACT_PLACE[a.n]||(a.n+' '+city);
-      c.appendChild(el('div','act hasimg',
-      `<div class="thumb">${photo(a.img, a.n)}</div>
-       <div class="meta"><b>${a.n}</b><p>${a.d}</p>${mapBtn(place)}</div>`));
-    });
+    arr.forEach(a=>c.appendChild(el('div','extra',
+      `<div class="xi">${I.star}</div>
+       <div class="xc"><b>${a.n}</b><p>${a.d}</p>${mapBtn(a.q)}</div>`)));
     v.appendChild(c);
   });
 

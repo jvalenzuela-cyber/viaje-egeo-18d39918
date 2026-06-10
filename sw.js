@@ -1,6 +1,6 @@
 /* Service worker — offline en destino, pero siempre la última versión si hay conexión.
    Estrategia: HTML network-first (refresca al regenerar la app); imágenes/estáticos cache-first. */
-const VERSION = 'v3';
+const VERSION = 'v4';
 const CACHE = 'viaje-egeo-' + VERSION;
 const IMG_KEYS = [
   'est_hero','cap_hero','ath_hero','nax_hero',
@@ -11,7 +11,9 @@ const IMG_KEYS = [
   'd_kahvalti','d_balik','d_iskender','d_testi','d_manti','d_kofte','d_baklava','d_simit',
   'd_souvlaki','d_moussaka','d_tzatziki','d_saganaki','d_graviera','d_loukoumades'
 ];
-const CORE = ['./', './index.html'].concat(IMG_KEYS.map(k => 'img/' + k + '.jpg'));
+const CORE = ['./', './index.html', './manifest.json',
+  './icon-192.png', './icon-512.png', './icon-maskable.png', './icon-180.png']
+  .concat(IMG_KEYS.map(k => 'img/' + k + '.jpg'));
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));

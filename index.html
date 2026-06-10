@@ -446,10 +446,12 @@ const CITY = {
 };
 
 const STATS = [ {v:'13', k:'días'}, {v:'4', k:'destinos'}, {v:'5', k:'vuelos'} ];
+/*SYNC:TOTALS*/
 const TOTALS = {
   clp_total:'$6.385.146', eur_total:'6.116 €',
   clp_pp:'$2.128.382', eur_pp:'2.039 €', rate:'1 € ≈ 1.044 CLP',
 };
+/*END:TOTALS*/
 
 const ROUTE = [
   {city:'EST', name:'Estambul', days:'20–23 jun', nights:'3 noches', img:'est_hero', desc:'Casco histórico (Sultanahmet) y Bósforo. Llegada el 20 por la noche.'},
@@ -470,7 +472,7 @@ const NEXT = [
 const FLIGHTS = [
   {n:1,date:'20/06',from:'BCN',to:'IST',cityFrom:'Barcelona',cityTo:'Estambul',airline:'Vueling VY3072',dep:'17:15',arr:'22:00',loc:'MHGH3P',bag:'Fly Light (mano)',price:'110,67 €/pax',status:'Comprado',stop:false,note:'Directo 3h45. Llega a IST (lado europeo). Ref cliente 40-943954731 · PIN 6596.'},
   {n:2,date:'23/06',from:'SAW',to:'NAV',cityFrom:'Estambul',cityTo:'Nevşehir',airline:'AJET VF3268',dep:'07:45',arr:'09:00',loc:'43B6K1',bag:'Basic (mano)',price:'69,33 €/pax',status:'Comprado',stop:false,note:'⚠ SALE de SAW (Sabiha Gökçen, lado asiático), no de IST. Directo 1h15.'},
-  {n:3,date:'26/06',from:'NAV',to:'ATH',cityFrom:'Nevşehir',cityTo:'Atenas',airline:'Con escala (confirmar)',dep:'15:50',arr:'22:25',loc:'por confirmar',bag:'verificar',price:'162,33 €/pax',status:'Comprado',stop:true,note:'Con escala (~6h35). Confirmar localizador, escala y equipaje.'},
+  {n:3,date:'26/06',from:'NAV',to:'ATH',cityFrom:'Nevşehir',cityTo:'Atenas',airline:'Con escala (confirmar)',dep:'15:50',arr:'22:25',loc:'BES-31881268',bag:'verificar',price:'162,33 €/pax',status:'Comprado',stop:true,note:'Con escala (~6h35). Localizador confirmado. Falta verificar escala y equipaje.'},
   {n:4,date:'29/06',from:'ATH',to:'JNX',cityFrom:'Atenas',cityTo:'Naxos',airline:'Regional (confirmar)',dep:'08:50',arr:'09:35',loc:'por confirmar',bag:'verificar',price:'96 €/pax',status:'Comprado',stop:false,note:'Directo ~45 min. Confirmar operador y localizador.'},
   {n:5,date:'02/07',from:'JNX',to:'BCN',cityFrom:'Naxos',cityTo:'Barcelona',airline:'Con escala (confirmar)',dep:'20:10',arr:'01:00',loc:'por confirmar',bag:'verificar',price:'167 €/pax',status:'Comprado',stop:true,note:'Con escala. Sale 02/07 20:10, llega a BCN 03/07 ~01:00.'},
 ];
@@ -536,17 +538,20 @@ const ITIN = [
     note:'Llega a Barcelona el 03/07 ~01:00.'},
 ];
 
+/*SYNC:BALANCES*/
 const BALANCES = [
-  {name:'Paula',toca:'823,08 €',puesto:'0,00 €',saldo:823.08,note:'Su tercio de todo. Aún no ha aportado nada.'},
-  {name:'Cecilia',toca:'480,74 €',puesto:'789,00 €',saldo:-308.26,note:'Su tercio, menos su parte de los vuelos de Grecia que pagó.'},
-  {name:'Javiera',toca:'1.165,41 €',puesto:'1.680,23 €',saldo:-514.82,note:'Su tercio + la parte de Cecilia de los vuelos que compró y no le cobra.'},
+  {name:'Paula',toca:'823,08 €',puesto:'0,00 €',saldo:823.08,note:'su tercio de todo'},
+  {name:'Cecilia',toca:'480,74 €',puesto:'789,00 €',saldo:-308.26,note:'su tercio, menos su parte de los vuelos que pagó Javiera (no se la cobras)'},
+  {name:'Javiera',toca:'1.165,41 €',puesto:'1.680,23 €',saldo:-514.82,note:'su tercio + la parte de Cecilia de los vuelos que tú compraste y no le cobras'}
 ];
-const TRANSFERS_MONEY = [
-  {from:'Paula',to:'Javiera',amt:'560,08 €',c:'Su tercio de lo que Javiera adelantó (vuelos BCN-IST, transfers, crucero, globo, Acrópolis).'},
-  {from:'Cecilia',to:'Javiera',amt:'217,74 €',c:'Su tercio de lo adelantado, menos su parte de los vuelos que compró Javiera.'},
-  {from:'Paula',to:'Cecilia',amt:'263,00 €',c:'Su tercio de los vuelos de Grecia (ATH-Naxos / Naxos-BCN).'},
-  {from:'Javiera',to:'Cecilia',amt:'263,00 €',c:'Tu tercio de los vuelos de Grecia.'},
+/*END:BALANCES*/
+/*SYNC:SETTLEMENT*/
+let SETTLEMENT = [
+  {from:'Paula',to:'Javiera',amt:217.75,note:'pendiente (ya te pagó 342,33 € de los vuelos)'},
+  {from:'Paula',to:'Cecilia',amt:263.0,note:'su tercio de los vuelos de Grecia'},
+  {from:'Javiera',to:'Cecilia',amt:45.26,note:'NETO: le debes tú a ella, porque Cecilia adelantó los vuelos de Grecia (789 €)'}
 ];
+/*END:SETTLEMENT*/
 const BUDGET = [
   {cat:'Vuelos',v:'1.816 €',n:'5 tramos · 3 pax · comprado',ic:I.plane},
   {cat:'Alojamiento',v:'935 €',n:'4 hoteles · 12 noches',ic:I.bed},
@@ -558,18 +563,21 @@ const BUDGET = [
   {cat:'Conectividad',v:'60 €',n:'eSIM Turquía + Grecia',ic:I.globe},
   {cat:'Compras / souvenirs',v:'200 €',n:'bazares, regalos',ic:I.euro},
 ];
+/*SYNC:PAYMENTS*/
 const PAYMENTS = [
-  {c:'Vuelos BCN-IST · IST-NAV · NAV-ATH (3 pax)',by:'Javiera',amt:'1.027 €',val:1027,st:'Pagado',n:'3 tramos'},
-  {c:'Vuelos ATH-Naxos · Naxos-BCN (3 pax)',by:'Cecilia',amt:'789 €',val:789,st:'Pagado',n:'2 tramos'},
-  {c:'Transfer IST → hotel',by:'Javiera',amt:'52 €',val:52,st:'Pagado',n:'GetTransfer #24478211'},
-  {c:'Crucero Bósforo (3 pax)',by:'Javiera',amt:'75,60 €',val:75.60,st:'Pagado',n:'GetYourGuide · 19 jun'},
-  {c:'Entradas Acrópolis (3 pax)',by:'Javiera',amt:'90 €',val:90,st:'Pagado',n:'28 jun 11:00 · A-1192049/50/51'},
-  {c:'Globo Capadocia (3 pax)',by:'Javiera',amt:'407,16 €',val:407.16,st:'Pagado',n:'24 jun · 135,72 €/pax · cargo 22/06'},
-  {c:'Transfer Capadocia → Göreme (3 pax)',by:'Javiera',amt:'28,47 €',val:28.47,st:'Pagado',n:'Viator · 9,49 €/pax · vuelta sin reservar'},
-  {c:'Transfer hotel → SAW',by:'—',amt:'52 €',val:52,st:'Pendiente',n:'efectivo al conductor 23 jun'},
-  {c:'Alojamiento (4 hoteles)',by:'—',amt:'935,46 €',val:935.46,st:'Pendiente',n:'pagar/confirmar in situ'},
-  {c:'Free tours Estambul y Atenas',by:'—',amt:'0 € + propina',val:0,st:'Reservado',n:'Civitatis · a voluntad ~5-10 €/pax'},
+  {c:'Vuelos: BCN-IST · IST-NAV · NAV-ATH (3 pax)',by:'Javiera',amt:'1.027,00 €',val:1027.0,st:'Pagado',n:'3 tramos'},
+  {c:'Vuelos: ATH-Naxos · Naxos-BCN (3 pax)',by:'Cecilia',amt:'789,00 €',val:789.0,st:'Pagado',n:'2 tramos'},
+  {c:'Transfer IST → hotel',by:'Javiera',amt:'52,00 €',val:52.0,st:'Pagado',n:'GetTransfer #24478211'},
+  {c:'Crucero Bósforo (3 pax)',by:'Javiera',amt:'75,60 €',val:75.6,st:'Pagado',n:'GetYourGuide, cargo 19 jun'},
+  {c:'Free tour Estambul',by:'—',amt:'0,00 €',val:0.0,st:'Reservado',n:'Civitatis · gratis · 21 jun 10:30 · inicio Plaza de Sultanahmet · 2h30 (exteriores) · a voluntad'},
+  {c:'Free tour Atenas',by:'—',amt:'0,00 €',val:0.0,st:'Reservado',n:'Civitatis A39457507 · español · 27 jun 10:30 · a voluntad (~5-10 €/pax) · Free Walking Tour Athens'},
+  {c:'Entradas Acrópolis Atenas (3 pax)',by:'Javiera',amt:'90,00 €',val:90.0,st:'Pagado',n:'3 adultos · 28 jun 11:00-12:00 · 30 €/pax · A-1192049/50/51'},
+  {c:'Transfer hotel → SAW',by:'—',amt:'52,00 €',val:52.0,st:'Pendiente',n:'efectivo al conductor 23 jun'},
+  {c:'Transfer aeropuerto Capadocia → Göreme (3 pax)',by:'Javiera',amt:'28,47 €',val:28.47,st:'Pagado',n:'Viator BR-1408375785 · 9,49 €/pax · shuttle compartido (NAV/Kayseri ↔ Göreme) · llegada 23 jun 10:00 · cargo automático 21/06 a tarjeta de Javiera · VUELTA 26 jun aún por reservar'},
+  {c:'Alojamiento (4 hoteles)',by:'—',amt:'935,46 €',val:935.46,st:'Pendiente',n:'pagar/confirmar'},
+  {c:'Globo Capadocia (3 pax)',by:'Javiera',amt:'407,16 €',val:407.16,st:'Pagado',n:'Fairychimneys (vía Viator) · vuelo estándar Göreme 04:30 · 24 jun · 3 pax (135,72 €/pax) · 3h aprox · cargo 22/06 a tarjeta ****0014'}
 ];
+/*END:PAYMENTS*/
 
 const MEALS = [
   {date:'20/06',city:'Estambul',lunch:'— (en Barcelona)',dinner:'Cena ligera y tardía cerca del hotel (Sultanahmet). Llegáis a las 22:00.'},
@@ -1072,19 +1080,20 @@ function renderMoney(){
     return res;
   }
   const colors={Paula:'#d39a3e',Cecilia:'#d98a6a',Javiera:'#22b4c4'};
-  const moves=settle(BALANCES);
+  // usa el bloque "neto" de la hoja si está; si no, calcula la liquidación mínima
+  const moves=(typeof SETTLEMENT!=='undefined' && SETTLEMENT.length)?SETTLEMENT:settle(BALANCES);
   const debtors=[...new Set(moves.map(m=>m.from))];
   const recv=[...new Set(moves.map(m=>m.to))];
   const insight = debtors.length===1
     ? `Solo <b>${debtors[0]}</b> tiene que pagar. Con ${moves.length===1?'esta transferencia':'estas '+moves.length+' transferencias'} queda todo saldado, y ${recv.join(' y ')} no se deben nada entre ellas.`
-    : `Con estas ${moves.length} transferencias queda todo saldado.`;
+    : `Estas son las transferencias pendientes para dejar la cuenta a cero (ya cuenta lo que cada una ha adelantado).`;
   v.appendChild(el('div','callout',`<span class="ci">${I.check}</span><div>${insight}</div>`));
   moves.forEach(m=>{
     v.appendChild(el('div','settle',
       `<i class="av" style="background:${colors[m.from]||'#5d7681'}">${m.from[0]}</i>
        <span class="ar">${I.chevR}</span>
        <i class="av" style="background:${colors[m.to]||'#5d7681'}">${m.to[0]}</i>
-       <div class="slbl"><b>${m.from}</b> paga a <b>${m.to}</b></div>
+       <div class="slbl"><b>${m.from}</b> paga a <b>${m.to}</b>${m.note?`<div style="font-size:11px;color:var(--muted);margin-top:2px">${m.note}</div>`:''}</div>
        <div class="samt">${eur(m.amt)}</div>`));
   });
   // detalle del reparto (colapsable)

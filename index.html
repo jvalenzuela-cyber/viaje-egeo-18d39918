@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a3d52">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Viaje 2026">
+<title>Estambul · Capadocia · Atenas · Naxos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sea:#0a3d52; --sea2:#125a78; --aegean:#1b8aa6; --turq:#22b4c4;
+    --sand:#f6efe2; --paper:#fbf7ef; --ink:#10242c; --muted:#5d7681;
+    --line:rgba(10,61,82,.12); --gold:#d39a3e; --rose:#d98a6a;
+    --good:#1f9d76; --bad:#d05a4e; --warn:#cf8a2c;
+    --card:#ffffff; --shadow:0 6px 24px rgba(10,61,82,.10);
+    --safe-b:env(safe-area-inset-bottom,0px);
+    --safe-t:env(safe-area-inset-top,0px);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    background:var(--paper); color:var(--ink);
+    -webkit-font-smoothing:antialiased; line-height:1.5;
+    padding-bottom:calc(74px + var(--safe-b));
+  }
+  h1,h2,h3,.serif{font-family:'Fraunces',Georgia,serif}
+  a{color:var(--aegean);text-decoration:none}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:40;
+    background:linear-gradient(160deg,#0a3d52,#125a78);
+    color:#fff;padding:calc(14px + var(--safe-t)) 0 0;
+    box-shadow:0 4px 18px rgba(10,61,82,.25);
+  }
+  .head-inner{padding:0 18px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .brand .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9fd6e2;font-weight:600}
+  .brand h1{font-size:19px;margin:2px 0 0;font-weight:600;line-height:1.15}
+  .count{
+    text-align:right;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+    border-radius:14px;padding:7px 12px;min-width:74px;backdrop-filter:blur(4px)
+  }
+  .count .num{font-family:'Fraunces',serif;font-size:24px;font-weight:700;line-height:1}
+  .count .lbl{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#cdeaf1}
+
+  /* pill nav */
+  nav.tabs{display:flex;gap:6px;overflow-x:auto;padding:0 14px 12px;scrollbar-width:none}
+  nav.tabs::-webkit-scrollbar{display:none}
+  nav.tabs button{
+    flex:0 0 auto;border:0;background:rgba(255,255,255,.12);color:#dff0f4;
+    font-family:inherit;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;
+    cursor:pointer;white-space:nowrap;transition:.15s;display:flex;align-items:center;gap:6px
+  }
+  nav.tabs button.on{background:var(--turq);color:#05323f;box-shadow:0 2px 10px rgba(34,180,196,.45)}
+
+  /* ---------- Layout ---------- */
+  main{max-width:680px;margin:0 auto;padding:16px 16px 40px}
+  .view{display:none;animation:fade .25s ease}
+  .view.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .sec-title{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--aegean);font-weight:700;margin:22px 2px 10px}
+  .sec-title:first-child{margin-top:4px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 16px;box-shadow:var(--shadow);margin-bottom:12px}
+  .card.flat{box-shadow:none}
+
+  .pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;letter-spacing:.02em}
+  .pill.ok{background:rgba(31,157,118,.13);color:var(--good)}
+  .pill.pend{background:rgba(207,138,44,.15);color:var(--warn)}
+  .pill.info{background:rgba(27,138,166,.12);color:var(--aegean)}
+  .pill.pay{background:rgba(31,157,118,.13);color:var(--good)}
+
+  /* ---------- Hero (Inicio) ---------- */
+  .hero{
+    border-radius:20px;overflow:hidden;position:relative;color:#fff;
+    background:linear-gradient(150deg,#0a3d52 0%,#125a78 55%,#1b8aa6 100%);
+    padding:22px 20px 20px;box-shadow:var(--shadow);margin-bottom:16px
+  }
+  .hero::after{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(34,180,196,.45),transparent 70%)}
+  .hero .route{font-family:'Fraunces',serif;font-size:23px;font-weight:600;line-height:1.2;position:relative}
+  .hero .dates{margin-top:8px;font-size:13px;color:#cdeaf1;font-weight:500;position:relative}
+  .hero .who{margin-top:14px;display:flex;gap:8px;position:relative;flex-wrap:wrap}
+  .ava{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);padding:5px 11px 5px 5px;border-radius:999px;font-size:12.5px;font-weight:600}
+  .ava i{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:700;color:#05323f}
+
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 12px;text-align:center;box-shadow:var(--shadow)}
+  .stat .v{font-family:'Fraunces',serif;font-size:21px;font-weight:700;color:var(--sea)}
+  .stat .k{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:3px;font-weight:600}
+
+  .leg{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+  .leg:last-child{border-bottom:0}
+  .leg .dot{flex:0 0 auto;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;color:#fff;font-family:'Fraunces',serif;font-weight:700;font-size:13px}
+  .leg .m{flex:1}
+  .leg .m b{font-size:14.5px}
+  .leg .m span{display:block;font-size:12px;color:var(--muted);margin-top:1px}
+  .leg .n{font-size:11px;color:var(--muted);text-align:right;white-space:nowrap;padding-top:3px}
+
+  .next li{list-style:none}
+  .next ul{margin:0;padding:0}
+  .next li{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+  .next li:last-child{border-bottom:0}
+  .next .tag{flex:0 0 auto;font-size:10px;font-weight:700;letter-spacing:.04em;color:#fff;background:var(--rose);padding:3px 8px;border-radius:7px;margin-top:1px}
+
+  /* ---------- Itinerary ---------- */
+  .day{margin-bottom:14px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--card)}
+  .day-head{display:flex;align-items:center;gap:12px;padding:13px 15px;cursor:pointer;background:linear-gradient(100deg,rgba(27,138,166,.06),transparent)}
+  .day-head .date{flex:0 0 auto;text-align:center;background:var(--sea);color:#fff;border-radius:12px;padding:6px 9px;min-width:46px}
+  .day-head .date .d{font-family:'Fraunces',serif;font-size:18px;font-weight:700;line-height:1}
+  .day-head .date .mo{font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;color:#bfe3ec}
+  .day-head .ti{flex:1;min-width:0}
+  .day-head .ti b{font-size:15px;display:flex;align-items:center;gap:7px}
+  .day-head .ti span{font-size:11.5px;color:var(--muted);display:block;margin-top:2px}
+  .day-head .chev{transition:.25s;color:var(--aegean);flex:0 0 auto}
+  .day.open .chev{transform:rotate(180deg)}
+  .day-body{display:none;padding:4px 15px 14px}
+  .day.open .day-body{display:block}
+  .slot{display:flex;gap:11px;padding:9px 0;border-top:1px solid var(--line)}
+  .slot .ic{flex:0 0 auto;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:rgba(27,138,166,.1);color:var(--aegean)}
+  .slot .tx{flex:1;font-size:13.5px}
+  .slot .tx b{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);display:block;font-weight:700}
+  .daynote{margin-top:11px;font-size:12.5px;color:var(--sea2);background:rgba(27,138,166,.07);border-left:3px solid var(--aegean);padding:9px 11px;border-radius:0 10px 10px 0}
+  .badge-city{font-size:10px;font-weight:700;letter-spacing:.04em;color:#fff;padding:2px 8px;border-radius:7px}
+
+  /* ---------- Flight / hotel cards ---------- */
+  .fcard{position:relative}
+  .froute{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .froute .ap{font-family:'Fraunces',serif;font-size:21px;font-weight:700}
+  .froute .arr{flex:1;height:1px;background:linear-gradient(90deg,var(--line),var(--aegean),var(--line));position:relative}
+  .froute .arr::after{content:"✈";position:absolute;right:-2px;top:-10px;color:var(--aegean);font-size:14px}
+  .froute .arr .plus{position:absolute;left:50%;top:-9px;transform:translateX(-50%);font-size:10px;color:var(--muted);background:var(--card);padding:0 5px}
+  .ftimes{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:10px}
+  .ftimes b{color:var(--ink);font-size:13px}
+  .fmeta{display:flex;flex-wrap:wrap;gap:7px 14px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:9px}
+  .fmeta b{color:var(--ink)}
+  .hotel .hh{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .hotel .hh h3{margin:0;font-size:17px}
+  .hotel .stay{font-size:12px;color:var(--muted);margin-top:3px}
+  .hotel .feat{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+  .feat .t{font-size:11.5px;background:rgba(10,61,82,.05);border:1px solid var(--line);padding:4px 9px;border-radius:8px;color:var(--sea2)}
+  .booklink{display:inline-flex;align-items:center;gap:6px;margin-top:11px;font-size:13px;font-weight:600;background:rgba(27,138,166,.1);padding:8px 13px;border-radius:10px}
+
+  /* ---------- Money ---------- */
+  .balcard{display:flex;align-items:center;gap:13px;padding:13px 15px;border-radius:14px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:10px}
+  .balcard i{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:700;font-family:'Fraunces',serif;font-size:16px;color:#05323f;flex:0 0 auto}
+  .balcard .nm{flex:1}
+  .balcard .nm b{font-size:15px}
+  .balcard .nm span{display:block;font-size:11.5px;color:var(--muted);margin-top:1px;max-width:32ch}
+  .balcard .amt{text-align:right;font-family:'Fraunces',serif;font-weight:700;font-size:16px;white-space:nowrap}
+  .amt.owe{color:var(--bad)} .amt.get{color:var(--good)}
+  .transfer{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+  .transfer:last-child{border-bottom:0}
+  .transfer .ar{color:var(--aegean);font-weight:700}
+  .transfer .tamt{margin-left:auto;font-weight:700;font-family:'Fraunces',serif;color:var(--sea)}
+  .bud{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .bud:last-child{border-bottom:0}
+  .bud .bic{width:30px;height:30px;border-radius:9px;background:rgba(27,138,166,.1);color:var(--aegean);display:grid;place-items:center;flex:0 0 auto}
+  .bud .bn{flex:1;font-size:13.5px}
+  .bud .bn span{display:block;font-size:11px;color:var(--muted)}
+  .bud .bv{font-weight:700;font-family:'Fraunces',serif;font-size:14.5px;white-space:nowrap}
+  .total-bar{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(120deg,#0a3d52,#1b8aa6);color:#fff;border-radius:14px;padding:14px 17px;margin-top:6px}
+  .total-bar .tt{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#cdeaf1}
+  .total-bar .tv{font-family:'Fraunces',serif;font-size:24px;font-weight:700}
+  .total-bar small{display:block;font-size:11px;color:#bfe3ec;text-transform:none;letter-spacing:0}
+  .payitem{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .payitem:last-child{border-bottom:0}
+  .payitem .pc{flex:1}
+  .payitem .pc b{font-size:13.5px}
+  .payitem .pc span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+  .payitem .pv{text-align:right;white-space:nowrap}
+  .payitem .pv b{font-family:'Fraunces',serif;font-size:14px}
+
+  /* ---------- Food ---------- */
+  .meal{margin-bottom:12px}
+  .meal .mh{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+  .meal .mh .md{font-family:'Fraunces',serif;font-weight:700;font-size:15px;color:var(--sea)}
+  .meal .mh .mc{font-size:11px;color:var(--muted)}
+  .meal .row{display:flex;gap:10px;padding:7px 0;font-size:13px;border-top:1px solid var(--line)}
+  .meal .row .lab{flex:0 0 58px;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--aegean);padding-top:2px}
+  .dish{padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+  .dish:last-child{border-bottom:0}
+  .dish b{display:block;font-size:13.5px}
+  .dish span{font-size:12.5px;color:var(--muted)}
+
+  /* ---------- Lists (check) ---------- */
+  .progress{height:8px;border-radius:999px;background:rgba(10,61,82,.1);overflow:hidden;margin:6px 0 14px}
+  .progress i{display:block;height:100%;background:linear-gradient(90deg,var(--turq),var(--good));transition:.4s}
+  .chk{display:flex;gap:11px;align-items:flex-start;padding:11px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+  .chk:last-child{border-bottom:0}
+  .chk .box{flex:0 0 auto;width:22px;height:22px;border-radius:7px;border:2px solid var(--line);display:grid;place-items:center;transition:.15s;margin-top:1px;background:#fff}
+  .chk.done .box{background:var(--good);border-color:var(--good)}
+  .chk .box svg{opacity:0;transition:.15s}
+  .chk.done .box svg{opacity:1}
+  .chk .ct{flex:1;font-size:14px}
+  .chk .ct span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+  .chk.done .ct b{text-decoration:line-through;color:var(--muted)}
+  .chk .cat{font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--aegean);background:rgba(27,138,166,.1);padding:2px 7px;border-radius:6px;flex:0 0 auto;margin-top:2px}
+  .reset{display:block;margin:14px auto 0;background:none;border:1px solid var(--line);color:var(--muted);font-family:inherit;font-size:12px;padding:7px 16px;border-radius:999px;cursor:pointer}
+
+  /* ---------- Info ---------- */
+  .note{display:flex;gap:11px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+  .note:last-child{border-bottom:0}
+  .note .ni{flex:0 0 auto;color:var(--aegean);margin-top:1px}
+  .contact{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .contact:last-child{border-bottom:0}
+  .contact .ci{width:38px;height:38px;border-radius:11px;background:rgba(27,138,166,.1);color:var(--aegean);display:grid;place-items:center;flex:0 0 auto}
+  .contact .cd{flex:1;min-width:0}
+  .contact .cd b{font-size:13.5px}
+  .contact .cd span{display:block;font-size:11.5px;color:var(--muted)}
+  .contact .cact{display:flex;gap:8px}
+  .contact .cact a{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--sea);color:#fff}
+  .ferry{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+  .ferry:last-child{border-bottom:0}
+  .ferry b{flex:1}
+  .ferry .fp{font-weight:700;font-family:'Fraunces',serif;color:var(--sea)}
+  .ferry .ft{font-size:11.5px;color:var(--muted)}
+  .act{padding:10px 0;border-bottom:1px solid var(--line)}
+  .act:last-child{border-bottom:0}
+  .act b{font-size:14px}
+  .act p{margin:3px 0 0;font-size:12.5px;color:var(--muted)}
+
+  .sub{font-size:12.5px;color:var(--muted);margin:-4px 2px 12px}
+  .footer{text-align:center;font-size:11px;color:var(--muted);margin-top:30px;padding-top:16px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-inner">
+    <div class="brand">
+      <div class="eyebrow">Turquía & Grecia · 2026</div>
+      <h1 id="headTitle">Estambul · Capadocia<br>Atenas · Naxos</h1>
+    </div>
+    <div class="count">
+      <div class="num" id="cdNum">–</div>
+      <div class="lbl" id="cdLbl">días</div>
+    </div>
+  </div>
+  <nav class="tabs" id="tabs"></nav>
+</header>
+
+<main>
+  <section class="view on" id="v-inicio"></section>
+  <section class="view" id="v-plan"></section>
+  <section class="view" id="v-logistica"></section>
+  <section class="view" id="v-dinero"></section>
+  <section class="view" id="v-comida"></section>
+  <section class="view" id="v-listas"></section>
+  <section class="view" id="v-info"></section>
+  <div class="footer">App de viaje · hecha desde la hoja de planificación · funciona sin conexión</div>
+</main>
+
+<script>
+/* ============== ICONS (Feather-style line SVG) ============== */
+const I = {
+  plane:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3.5S18 4 16.5 5.5L13 9 4.8 7.2c-.3-.1-.7 0-.9.3l-.5.5c-.3.3-.2.7.2.9L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 2.1 5.4c.2.4.6.5.9.2l.5-.5c.3-.2.4-.6.3-.9z"/></svg>',
+  bed:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>',
+  map:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 8 3 16 6 23 3 23 18 16 21 8 18 1 21"/><line x1="8" y1="3" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="21"/></svg>',
+  euro:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7a6 6 0 1 0 0 10M5 9h7M5 13h6"/></svg>',
+  food:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h0a2 2 0 0 0 2-2V2M5 2v9M5 11v11M18 2c-1.7 0-3 2-3 5s1.3 5 3 5v9"/></svg>',
+  check:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
+  info:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
+  sun:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
+  moon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>',
+  noon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3M5 12H2M22 12h-3M5 19l-1 1M19 19l1 1M5.6 5.6 4.5 4.5M18.4 5.6l1.1-1.1"/><circle cx="12" cy="13" r="4"/></svg>',
+  bus:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 10h18M7 17v3M17 17v3"/><circle cx="7.5" cy="14" r=".5"/><circle cx="16.5" cy="14" r=".5"/></svg>',
+  chev:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>',
+  phone:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>',
+  globe:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg>',
+  ship:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16s1.5-1 3-1 3 1 5 1 3.5-1 5-1 3 1 3 1M4 14V7l8-3 8 3v7M12 4v10"/></svg>',
+  star:'<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>',
+};
+
+/* ============== DATA ============== */
+const TRIP = { start:'2026-06-20', end:'2026-07-02', pax:'Javiera · Paula · Cecilia' };
+
+const CITY = {
+  EST:{n:'Estambul', c:'#125a78'},
+  CAP:{n:'Capadocia', c:'#c0743a'},
+  ATH:{n:'Atenas', c:'#1b8aa6'},
+  NAX:{n:'Naxos', c:'#2491a0'},
+  BCN:{n:'Barcelona', c:'#5d7681'},
+};
+
+const STATS = [
+  {v:'13', k:'días'},
+  {v:'4', k:'destinos'},
+  {v:'5', k:'vuelos'},
+  {v:'2.039 €', k:'por persona'},
+];
+
+const ROUTE = [
+  {city:'EST', name:'Estambul', days:'20–23 jun', nights:'3 noches', desc:'Casco histórico (Sultanahmet) y Bósforo. Llegada el 20 por la noche.'},
+  {city:'CAP', name:'Capadocia', days:'23–26 jun', nights:'3 noches', desc:'Göreme: globo al amanecer, valles y ciudades subterráneas.'},
+  {city:'ATH', name:'Atenas', days:'26–29 jun', nights:'3 noches', desc:'Acrópolis, casco antiguo y museos. Llegada el 26 por la noche.'},
+  {city:'NAX', name:'Naxos', days:'29 jun–2 jul', nights:'3 noches', desc:'Playas, pueblos y saltos en ferry a otras islas (opcional).'},
+];
+
+/* upcoming / key reminders shown on home */
+const NEXT = [
+  {tag:'20 jun', t:'Vuelo BCN→Estambul 17:15 (VY3072). Traslado al hotel ya pagado, recogida 22:00.'},
+  {tag:'21 jun', t:'Free tour 10:30 en Plaza de Sultanahmet. Reservar Santa Sofía y Cisterna (slot tarde, abre hasta 22:00).'},
+  {tag:'23 jun', t:'¡Madrugón! Traslado hotel→SAW a las 04:30 (52 € en efectivo al conductor). Vuelo 07:45 a Capadocia.'},
+  {tag:'24 jun', t:'GLOBO al amanecer (~05:00). Lleva una capa de abrigo.'},
+  {tag:'26 jun', t:'Falta reservar el traslado de vuelta Göreme→aeropuerto para el vuelo NAV–ATH de las 15:50.'},
+  {tag:'28 jun', t:'Acrópolis: entrada reservada 11:00–12:00. Agua y gorra.'},
+];
+
+const FLIGHTS = [
+  {n:1,date:'20/06',from:'BCN',to:'IST',cityFrom:'Barcelona',cityTo:'Estambul',airline:'Vueling VY3072',dep:'17:15',arr:'22:00',loc:'MHGH3P',bag:'Fly Light (mano)',price:'110,67 €/pax',status:'Comprado',stop:false,note:'Directo 3h45. Llega a IST (lado europeo). Ref cliente 40-943954731 · PIN 6596.'},
+  {n:2,date:'23/06',from:'SAW',to:'NAV',cityFrom:'Estambul',cityTo:'Nevşehir',airline:'AJET VF3268',dep:'07:45',arr:'09:00',loc:'43B6K1',bag:'Basic (mano)',price:'69,33 €/pax',status:'Comprado',stop:false,note:'⚠ SALE de SAW (Sabiha Gökçen, lado asiático), no de IST. Directo 1h15.'},
+  {n:3,date:'26/06',from:'NAV',to:'ATH',cityFrom:'Nevşehir',cityTo:'Atenas',airline:'Con escala (confirmar)',dep:'15:50',arr:'22:25',loc:'por confirmar',bag:'verificar',price:'162,33 €/pax',status:'Comprado',stop:true,note:'Con escala (~6h35). Confirmar localizador, escala y equipaje.'},
+  {n:4,date:'29/06',from:'ATH',to:'JNX',cityFrom:'Atenas',cityTo:'Naxos',airline:'Regional (confirmar)',dep:'08:50',arr:'09:35',loc:'por confirmar',bag:'verificar',price:'96 €/pax',status:'Comprado',stop:false,note:'Directo ~45 min. Confirmar operador y localizador.'},
+  {n:5,date:'02/07',from:'JNX',to:'BCN',cityFrom:'Naxos',cityTo:'Barcelona',airline:'Con escala (confirmar)',dep:'20:10',arr:'01:00',loc:'por confirmar',bag:'verificar',price:'167 €/pax',status:'Comprado',stop:true,note:'Con escala. Sale 02/07 20:10, llega a BCN 03/07 ~01:00.'},
+];
+
+const HOTELS = [
+  {city:'EST',name:'Galaxy Hotel Sultanahmet',inn:'20/06',out:'23/06',nights:3,ppn:'48 €',total:'144 €',status:'Reservado',feats:['Desayuno incluido','Sultanahmet (Fatih)'],addr:'Oyuncu Sok. 33, Sultanahmet',link:'https://booking.com/Share-C7A1Mmf',note:''},
+  {city:'CAP',name:'Matiana View Cave',inn:'23/06',out:'26/06',nights:3,ppn:'124,82 €',total:'374,46 €',status:'Confirmada',feats:['Hotel cueva','Göreme','Cancelación gratis'],addr:'Aydınlı Sok. 1, 50180 Göreme',link:'https://booking.com/Share-N1YGCh',note:'⚠ La pestaña de presupuesto aún figura como "Sato Cave Hotel": confirmar cuál es el hotel definitivo y el desayuno.'},
+  {city:'ATH',name:'Epidavros Hotel',inn:'26/06',out:'29/06',nights:3,ppn:'54,67 €',total:'164 €',status:'Reservado',feats:['Sin desayuno','Omonia'],addr:'Koumoundourou 14, 10437 Atenas',link:'https://booking.com/Share-nNF1iF',note:'Tel: +30 210 523 0421'},
+  {city:'NAX',name:'Korali Garden',inn:'29/06',out:'02/07',nights:3,ppn:'84,33 €',total:'253 €',status:'Reservado',feats:['Sin desayuno','Playa St. George'],addr:'Agios Georgios, 84300 Naxos (Chora)',link:'https://booking.com/Share-R0qR2F',note:'Tel: +30 22850 25709'},
+];
+
+const TRANSFERS_LOG = [
+  {t:'Aeropuerto IST → hotel',op:'GetTransfer · Happy Life (Mercedes Vito)',when:'20 jun 22:00',status:'Pagado',note:'#24478211 · 52 € (Javiera) · mat. 34 FEK 906 · 56 km ~57 min · chófer +90 506 850 94 71'},
+  {t:'Hotel → aeropuerto SAW',op:'Istanbul Shuttle Port',when:'23 jun 04:30',status:'Reservado',note:'Reserva 1514036 · 52 € EN EFECTIVO al conductor · +90 542 825 6454'},
+  {t:'Nevşehir (NAV) → Göreme (ida)',op:'Viator shuttle compartido',when:'23 jun 10:00',status:'Pagado',note:'BR-1408375785 · 9,49 €/pax · cargo 21/06 (Javiera)'},
+  {t:'Göreme → aeropuerto (vuelta)',op:'Por reservar',when:'26 jun (vuelo 15:50)',status:'Pendiente',note:'Falta reservar el traslado de vuelta para el vuelo NAV–ATH.'},
+  {t:'Transporte local Estambul',op:'Istanbulkart (tranvía/metro/ferry)',when:'3 días',status:'Pendiente',note:'~5 €/día. Incluye el ferry público por el Bósforo.'},
+  {t:'Aeropuerto Atenas ↔ centro',op:'Metro línea 3 / taxi',when:'i/v',status:'Pendiente',note:'Metro ~9 €/pax por trayecto; taxi ~45 € el coche. La vuelta del 29 es muy temprano.'},
+  {t:'Aeropuerto Naxos ↔ hotel',op:'Taxi / traslado del hotel',when:'i/v',status:'Pendiente',note:'~3 km de Chora; ~12–15 € el coche por trayecto.'},
+  {t:'Transporte en Naxos',op:'ATV/coche o bus de línea',when:'playas y pueblos',status:'Pendiente',note:'Alquiler ~30 €/día ÷3, o bus ~2 €/trayecto.'},
+];
+
+const ITIN = [
+  {date:'20/06',dow:'Sábado',city:'EST',tag:'LLEGADA',hotel:'Galaxy Hotel Sultanahmet',
+    m:'Mañana libre en Barcelona', a:'Vuelo BCN→Estambul 17:15 (VY3072)', e:'Llegada 22:00 · traslado al hotel',
+    tr:'Vueling VY3072 (BCN→IST)', note:'Llega a IST (lado europeo). Tarifa Fly Light. Ref MHGH3P.'},
+  {date:'21/06',dow:'Domingo',city:'EST',tag:'',hotel:'Galaxy Hotel Sultanahmet',
+    m:'Free tour 10:30 (Civitatis) desde Plaza de Sultanahmet, casco histórico 2h30 (exteriores) · luego Santa Sofía',
+    a:'Sultanahmet: Mezquita Azul, Hipódromo y Cisterna Basílica (reservar slot tarde/noche, abre hasta 22:00)',
+    e:'Cena en Sultanahmet', tr:'A pie / tranvía T1', note:'Free tour Civitatis A39313657. Entradas Santa Sofía/Cisterna online (webs oficiales).'},
+  {date:'22/06',dow:'Lunes',city:'EST',tag:'',hotel:'Galaxy Hotel Sultanahmet',
+    m:'Palacio de Topkapı', a:'Gran Bazar y paseo por Karaköy/Gálata (vistas y atardecer)',
+    e:'Crucero Bósforo con cena 20:30 (reservado · embarque Kabataş 20:00)', tr:'Tranvía / metro / a pie',
+    note:'Crucero GetYourGuide GYGN6B4QLAX3 · pagado.'},
+  {date:'23/06',dow:'Martes',city:'CAP',tag:'LLEGADA',hotel:'Matiana View Cave',
+    m:'Traslado hotel→SAW 04:30 · Vuelo SAW→Nevşehir 07:45 · traslado a Göreme',
+    a:'Museo al aire libre de Göreme', e:'Cena con vistas a los valles', tr:'AJET VF3268 + traslado',
+    note:'⚠ Sale de SAW (lado asiático). Transfer 04:30 (Istanbul Shuttle Port, 52 € efectivo). Ref 43B6K1.'},
+  {date:'24/06',dow:'Miércoles',city:'CAP',tag:'',hotel:'Matiana View Cave',
+    m:'GLOBO al amanecer (~05:00)', a:'Valle Rojo y Rosa, Uçhisar', e:'Atardecer en mirador', tr:'Tour / quad / coche',
+    note:'Globo reservado (Fairychimneys vía Viator). Llevar abrigo.'},
+  {date:'25/06',dow:'Jueves',city:'CAP',tag:'',hotel:'Matiana View Cave',
+    m:'Ciudad subterránea (Derinkuyu/Kaymaklı)', a:'Valle del Amor o Valle de Ihlara', e:'Noche en Göreme', tr:'Tour / coche', note:''},
+  {date:'26/06',dow:'Viernes',city:'ATH',tag:'LLEGADA',hotel:'Epidavros Hotel',
+    m:'Mañana libre en Capadocia', a:'Vuelo Nevşehir→Atenas 15:50 (con escala)', e:'Llegada ~22:25 · traslado al hotel',
+    tr:'Vuelo NAV→ATH (con escala)', note:'Confirmar localizador. Falta reservar traslado Göreme→aeropuerto.'},
+  {date:'27/06',dow:'Sábado',city:'ATH',tag:'',hotel:'Epidavros Hotel',
+    m:'Free tour 10:30 en español (Civitatis A39457507) desde Catedral Metropolitana, acaba en Monastiraki',
+    a:'Ágora antigua y Plaka', e:'Monastiraki, cena', tr:'Metro / a pie', note:'Entradas Acrópolis ya compradas para el 28.'},
+  {date:'28/06',dow:'Domingo',city:'ATH',tag:'',hotel:'Epidavros Hotel',
+    m:'Acrópolis + Partenón: entrada reservada 11:00–12:00. Agua y gorra (a esa hora pega el sol)',
+    a:'Museo de la Acrópolis (climatizado) + colina del Licabeto al atardecer', e:'Última noche en Atenas', tr:'Metro', note:''},
+  {date:'29/06',dow:'Lunes',city:'NAX',tag:'LLEGADA',hotel:'Korali Garden',
+    m:'Vuelo Atenas→Naxos 08:50 · traslado', a:'Playa (Agios Prokopios / Plaka)', e:'Atardecer en la Portara',
+    tr:'Vuelo ATH→JNX + traslado', note:''},
+  {date:'30/06',dow:'Martes',city:'NAX',tag:'',hotel:'Korali Garden',
+    m:'Playa / excursión en ferry (opcional)', a:'Pueblos de montaña (Halki, Apiranthos)', e:'Cena en Chora',
+    tr:'Coche/scooter o ferry', note:'Ferries a Paros, Mykonos, Koufonisia o Ios (ver Info).'},
+  {date:'01/07',dow:'Miércoles',city:'NAX',tag:'',hotel:'Korali Garden',
+    m:'Playa / relax', a:'Chora: castillo y compras', e:'Última noche en la isla', tr:'A pie / coche', note:''},
+  {date:'02/07',dow:'Jueves',city:'NAX',tag:'REGRESO',hotel:'—',
+    m:'Playa / check-out', a:'Vuelo Naxos→Barcelona 20:10 (con escala)', e:'Vuelo nocturno', tr:'Vuelo JNX→BCN (con escala)',
+    note:'Llega a Barcelona el 03/07 ~01:00.'},
+];
+
+/* ----- money ----- */
+const BALANCES = [
+  {name:'Paula',toca:'823,08 €',puesto:'0,00 €',saldo:823.08,note:'Su tercio de todo. Aún no ha aportado nada.'},
+  {name:'Cecilia',toca:'480,74 €',puesto:'789,00 €',saldo:-308.26,note:'Su tercio, menos su parte de los vuelos de Grecia que pagó.'},
+  {name:'Javiera',toca:'1.165,41 €',puesto:'1.680,23 €',saldo:-514.82,note:'Su tercio + la parte de Cecilia de los vuelos que compró y no le cobra.'},
+];
+const TRANSFERS_MONEY = [
+  {from:'Paula',to:'Javiera',amt:'560,08 €',c:'Su tercio de lo que Javiera adelantó (vuelos BCN-IST, transfers, crucero, globo, Acrópolis).'},
+  {from:'Cecilia',to:'Javiera',amt:'217,74 €',c:'Su tercio de lo adelantado, menos su parte de los vuelos que compró Javiera.'},
+  {from:'Paula',to:'Cecilia',amt:'263,00 €',c:'Su tercio de los vuelos de Grecia (ATH-Naxos / Naxos-BCN).'},
+  {from:'Javiera',to:'Cecilia',amt:'263,00 €',c:'Tu tercio de los vuelos de Grecia.'},
+];
+const BUDGET = [
+  {cat:'Vuelos',v:'1.816 €',n:'5 tramos · 3 pax · comprado',ic:I.plane},
+  {cat:'Alojamiento',v:'935 €',n:'4 hoteles · 12 noches',ic:I.bed},
+  {cat:'Comida y bebida',v:'1.365 €',n:'~35 €/pax/día × 13 días',ic:I.food},
+  {cat:'Transporte local',v:'473 €',n:'traslados + transporte en destino',ic:I.bus},
+  {cat:'Actividades y tours',v:'682 €',n:'entradas + crucero Bósforo',ic:I.star},
+  {cat:'Globo Capadocia',v:'407 €',n:'135,72 €/pax · pagado',ic:I.sun},
+  {cat:'Ferries Grecia',v:'210 €',n:'opcional · 1 excursión isla',ic:I.ship},
+  {cat:'Conectividad',v:'60 €',n:'eSIM Turquía + Grecia',ic:I.globe},
+  {cat:'Compras / souvenirs',v:'200 €',n:'bazares, regalos',ic:I.euro},
+];
+const PAYMENTS = [
+  {c:'Vuelos BCN-IST · IST-NAV · NAV-ATH (3 pax)',by:'Javiera',amt:'1.027 €',st:'Pagado',n:'3 tramos'},
+  {c:'Vuelos ATH-Naxos · Naxos-BCN (3 pax)',by:'Cecilia',amt:'789 €',st:'Pagado',n:'2 tramos'},
+  {c:'Transfer IST → hotel',by:'Javiera',amt:'52 €',st:'Pagado',n:'GetTransfer #24478211'},
+  {c:'Crucero Bósforo (3 pax)',by:'Javiera',amt:'75,60 €',st:'Pagado',n:'GetYourGuide · 19 jun'},
+  {c:'Entradas Acrópolis (3 pax)',by:'Javiera',amt:'90 €',st:'Pagado',n:'28 jun 11:00 · A-1192049/50/51'},
+  {c:'Globo Capadocia (3 pax)',by:'Javiera',amt:'407,16 €',st:'Pagado',n:'24 jun · 135,72 €/pax · cargo 22/06'},
+  {c:'Transfer Capadocia → Göreme (3 pax)',by:'Javiera',amt:'28,47 €',st:'Pagado',n:'Viator · 9,49 €/pax · vuelta sin reservar'},
+  {c:'Transfer hotel → SAW',by:'—',amt:'52 €',st:'Pendiente',n:'efectivo al conductor 23 jun'},
+  {c:'Alojamiento (4 hoteles)',by:'—',amt:'935,46 €',st:'Pendiente',n:'pagar/confirmar in situ'},
+  {c:'Free tours Estambul y Atenas',by:'—',amt:'0 € + propina',st:'Reservado',n:'Civitatis · a voluntad ~5–10 €/pax'},
+];
+
+/* ----- food ----- */
+const MEALS = [
+  {date:'20/06',city:'Estambul',lunch:'— (en Barcelona)',dinner:'Cena ligera y tardía cerca del hotel (Sultanahmet). Llegáis a las 22:00.'},
+  {date:'21/06',city:'Estambul',lunch:'Old Sultanahmet Cuisine (~12–15 €) o las lokantas de Hocapaşa (Kasap Osman).',dinner:'Seven Hills (vistas a Santa Sofía) o Matbah (cocina otomana).'},
+  {date:'22/06',city:'Estambul',lunch:'Kasap Osman (kebab/döner, Hocapaşa) o Bizim Lokanta.',dinner:'RESERVADO: crucero Bósforo con cena 20:30. No reservéis cena.'},
+  {date:'23/06',city:'Capadocia',lunch:'Al llegar a Göreme: Dibek o Topdeck Cave (testi kebab, encárgalo al llegar).',dinner:'Rocks Terrace (azotea con vistas a los valles).'},
+  {date:'24/06',city:'Capadocia',lunch:'Tras el globo y los valles: Pumpkin Göreme o algo en Uçhisar.',dinner:'Seten Anatolian (selección Guía Michelin 2026). Reserva con antelación.'},
+  {date:'25/06',city:'Capadocia',lunch:'Almuerzo ligero en Göreme tras la ciudad subterránea.',dinner:'Topdeck Cave (en cueva, con reserva) o Dibek (edificio de 475 años).'},
+  {date:'26/06',city:'Capadocia → Atenas',lunch:'Comida en Göreme antes del vuelo de las 15:50.',dinner:'Llegáis a las 22:25: cena tardía cerca del hotel (Omonia).'},
+  {date:'27/06',city:'Atenas',lunch:'El free tour acaba en Monastiraki: O Thanasis o Kostas (gyros y souvlaki).',dinner:'Plaka: Ta Platanos (1932) o The Old Tavern of Psarras (1898).'},
+  {date:'28/06',city:'Atenas',lunch:'Koukaki: Skoumbri (pescado) o una taberna de Plaka.',dinner:'Geros tou Moria o Saita (Plaka). Antes, atardecer en el Licabeto.'},
+  {date:'29/06',city:'Naxos',lunch:'Taberna de playa en Agios Prokopios o Plaka.',dinner:'Junto a la Portara: Naxos Apothecary (moderna) o Metaxi Mas. Cena con vista.'},
+  {date:'30/06',city:'Naxos',lunch:'Apiranthos: Lefteris o Stou Koutoupa (cocina naxiana).',dinner:'Chora: To Elliniko (patio de un antiguo monasterio) o Metaxi Mas.'},
+  {date:'01/07',city:'Naxos',lunch:'Playa o Chora.',dinner:'Axiotissa (de la granja a la mesa, ~20 min en coche) o To Elliniko. Reserva.'},
+  {date:'02/07',city:'Naxos → BCN',lunch:'Barabbas (junto al puerto, pescado y guisos) antes del aeropuerto.',dinner:'Vuelo a las 20:10.'},
+];
+const DISHES = {
+  'Turquía · Estambul y Capadocia':[
+    {n:'Kahvaltı (desayuno turco)',d:'El gran desayuno de quesos, aceitunas, huevos y mermeladas. Una experiencia en sí mismo.'},
+    {n:'Balık ekmek',d:'Bocadillo de pescado a la plancha junto al puente de Gálata. Callejero e icónico.'},
+    {n:'İskender kebab',d:'Láminas de döner sobre pan, con salsa de tomate y yogur.'},
+    {n:'Testi kebab',d:'Guiso de carne en olla de barro sellada que se rompe en la mesa. TÍPICO de Capadocia (encárgalo con antelación).'},
+    {n:'Mantı',d:'Raviolis turcos con yogur y mantequilla de pimentón.'},
+    {n:'Köfte',d:'Albóndigas a la brasa (las de Sultanahmet tienen fama).'},
+    {n:'Baklava y künefe',d:'Los dulces estrella. El künefe, queso con masa kadayıf y almíbar, caliente.'},
+    {n:'Para picar',d:'Çay (té), café turco, simit, lokum y dondurma (helado elástico).'},
+  ],
+  'Grecia · Atenas y Naxos':[
+    {n:'Souvlaki y gyros',d:'La comida callejera griega por excelencia (en Monastiraki).'},
+    {n:'Moussaka',d:'Pastel de berenjena, carne picada y bechamel.'},
+    {n:'Mezze de mesa',d:'Tzatziki, ensalada griega (horiatiki) y dolmades.'},
+    {n:'Pulpo a la brasa y saganaki',d:'Queso frito. Imprescindibles junto al mar.'},
+    {n:'Especialidades de Naxos',d:'Quesos locales (graviera, arseniko), patatas de Naxos y kítron (licor de cidra).'},
+    {n:'Dulces',d:'Loukoumades (buñuelos con miel) y galaktoboureko (pastel de crema).'},
+  ],
+};
+
+/* ----- checklists ----- */
+const TASKS = [
+  {cat:'Docs',t:'Confirmar localizadores NAV-ATH, ATH-JNX y JNX-BCN',n:'Faltan en la hoja de vuelos.',done:false},
+  {cat:'Docs',t:'Copias/fotos de pasaportes y reservas (físico + nube)',n:'',done:false},
+  {cat:'Docs',t:'Pasaporte vigente (+6 meses)',n:'Verificar los 3 pasaportes.',done:true},
+  {cat:'Docs',t:'Billetes de los 5 vuelos (digital + impreso)',n:'',done:true},
+  {cat:'Reservas',t:'Entradas Estambul: Santa Sofía, Cisterna y Topkapı (con Harén)',n:'Webs oficiales (muze.gov.tr / yerebatan.com). Cisterna: reservar para el 21.',done:false},
+  {cat:'Reservas',t:'Confirmar traslado de vuelta Göreme → aeropuerto (26 jun)',n:'Para el vuelo NAV-ATH de las 15:50.',done:false},
+  {cat:'Reservas',t:'GLOBO en Capadocia (3 pax)',n:'Fairychimneys · 24 jun · pagado.',done:true},
+  {cat:'Reservas',t:'Entradas Acrópolis (Atenas)',n:'28 jun 11:00–12:00 · compradas.',done:true},
+  {cat:'Salud',t:'Seguro de viaje (3 pax)',n:'Recomendado.',done:false},
+  {cat:'Salud',t:'Botiquín + protección solar',n:'',done:false},
+  {cat:'Salud',t:'Medicación personal con receta',n:'',done:false},
+  {cat:'Dinero',t:'Avisar al banco / activar uso en extranjero',n:'',done:false},
+  {cat:'Dinero',t:'Tarjeta sin comisiones en el extranjero',n:'',done:false},
+  {cat:'Dinero',t:'Efectivo: liras turcas (TRY) y euros',n:'Cambiar/sacar al llegar.',done:false},
+  {cat:'Conect.',t:'eSIM Turquía + eSIM Grecia',n:'',done:false},
+  {cat:'Conect.',t:'Mapas y traductor offline',n:'',done:false},
+  {cat:'Equipaje',t:'Revisar franquicia Fly Light (Vueling) y Basic (AJET)',n:'Probablemente solo mano; valorar facturar.',done:false},
+  {cat:'Equipaje',t:'Ropa para cubrirse en mezquitas (pañuelo, hombros/rodillas)',n:'',done:false},
+  {cat:'Equipaje',t:'Capa de abrigo para el globo',n:'Amanece frío.',done:false},
+  {cat:'Decidir',t:'Santa Sofía: ¿pagar galería superior (~25 €) por los mosaicos?',n:'Recomendado. Web oficial muze.gov.tr.',done:false},
+];
+const PACK = [
+  {cat:'Docs',t:'Pasaporte (3)',n:'+6 meses validez'},
+  {cat:'Docs',t:'Billetes y reservas (impreso/digital)',n:''},
+  {cat:'Docs',t:'Copias de documentos',n:''},
+  {cat:'Dinero',t:'Tarjetas + efectivo (liras y euros)',n:''},
+  {cat:'Electrónica',t:'Móvil + cargador',n:''},
+  {cat:'Electrónica',t:'Powerbank',n:'vuelos y días largos'},
+  {cat:'Electrónica',t:'Cámara',n:'globos y paisajes'},
+  {cat:'Ropa',t:'Ropa de verano ligera',n:'28–32 °C en ciudad'},
+  {cat:'Ropa',t:'Capa fina / chaqueta',n:'globo al amanecer'},
+  {cat:'Ropa',t:'Pañuelo + ropa que cubra hombros/rodillas',n:'mezquitas'},
+  {cat:'Ropa',t:'Calzado cómodo para caminar',n:'mucho adoquín y cuestas'},
+  {cat:'Ropa',t:'Sandalias / chanclas',n:'playa Naxos'},
+  {cat:'Playa',t:'Bañador ×2',n:''},
+  {cat:'Playa',t:'Toalla de secado rápido',n:''},
+  {cat:'Playa',t:'Gafas de sol',n:''},
+  {cat:'Playa',t:'Sombrero / gorra',n:''},
+  {cat:'Neceser',t:'Protección solar (alta)',n:''},
+  {cat:'Neceser',t:'Aseo personal',n:''},
+  {cat:'Neceser',t:'After-sun / hidratante',n:''},
+  {cat:'Botiquín',t:'Medicación personal',n:''},
+  {cat:'Botiquín',t:'Analgésico, antidiarreico, tiritas',n:''},
+  {cat:'Varios',t:'Mochila de día',n:''},
+  {cat:'Varios',t:'Botella de agua reutilizable',n:''},
+  {cat:'Varios',t:'Candado para maleta',n:''},
+];
+
+/* ----- info ----- */
+const NOTES = [
+  'Moneda: Turquía en liras (TRY), Grecia en euros (€). Lleva algo de efectivo.',
+  'Enchufes: Turquía y Grecia usan tipo C/F, 230 V (igual que España). No necesitas adaptador.',
+  'Mezquitas: hombros y rodillas cubiertos; mujeres, pañuelo para la cabeza.',
+  'Calor: junio 28–32 °C en Estambul y Atenas. Agua, gorra y protección solar.',
+  'Globo en Capadocia: madruga (~04:30) y refresca; lleva una capa de abrigo.',
+  'Aeropuertos de Estambul: LLEGAS a IST (europeo) pero el vuelo a Capadocia SALE de SAW (asiático). Son distintos: cuenta con el traslado.',
+  'Entrada: Grecia = Schengen (sin control). Turquía: España y Chile sin visado (turismo 90 días). Pasaporte +6 meses.',
+];
+const ACTS = {
+  'Estambul':[
+    {n:'Crucero por el Bósforo',d:'Paseo en barco entre dos continentes. (Ya reservado con cena el 22.)'},
+    {n:'Cisterna Basílica',d:'Cisterna romana subterránea. ~37 €. Reservar para evitar cola (slot tarde/noche).'},
+    {n:'Mezquita Azul',d:'Gratis. Cubrir hombros/rodillas; pañuelo. Cerrada en horario de rezo.'},
+    {n:'Palacio de Topkapı',d:'Palacio otomano + Harén. Mañana entera.'},
+    {n:'Gran Bazar y Bazar Egipcio',d:'Compras y regateo. El Gran Bazar cierra los domingos.'},
+    {n:'Torre de Gálata',d:'~30 €. Vistas 360°. Mejor al atardecer.'},
+  ],
+  'Capadocia':[
+    {n:'Globo al amanecer',d:'Lo más icónico. ~125 €/pax. (Reservado.) Sale ~05:00. Lleva abrigo.'},
+    {n:'Museo al aire libre de Göreme',d:'Iglesias rupestres con frescos. Patrimonio UNESCO.'},
+    {n:'Valles',d:'Rojo y Rosa (atardecer), del Amor, de las Palomas. A pie o en quad.'},
+    {n:'Ciudades subterráneas',d:'Derinkuyu o Kaymaklı. Varios niveles bajo tierra.'},
+    {n:'Uçhisar',d:'Castillo natural, el punto más alto. Vistas de toda Capadocia.'},
+  ],
+  'Atenas':[
+    {n:'Acrópolis y Partenón',d:'Imprescindible. (Reservado el 28, 11:00.) Lleva agua y gorra.'},
+    {n:'Museo de la Acrópolis',d:'Moderno, junto a la colina. Imprescindible.'},
+    {n:'Ágora antigua y Plaka',d:'Barrio histórico, calles peatonales y tabernas.'},
+    {n:'Colina del Licabeto',d:'La vista más alta de la ciudad. Atardecer.'},
+    {n:'Cabo Sunión (opcional)',d:'Templo de Poseidón al atardecer. Excursión de medio día.'},
+  ],
+  'Naxos':[
+    {n:'La Portara',d:'Puerta de mármol del templo de Apolo. Atardecer imperdible, junto al puerto.'},
+    {n:'Playas',d:'Agios Prokopios, Agia Anna, Plaka (arena), Mikri Vigla (kitesurf).'},
+    {n:'Pueblos de montaña',d:'Halki, Apiranthos (mármol), Filoti. Interior verde.'},
+    {n:'Chora (casco antiguo)',d:'Callejuelas venecianas, castillo (Kastro), tiendas y tabernas.'},
+  ],
+};
+const FERRIES = [
+  {n:'Paros',fast:'30 min',conv:'45 min',p:'~30 €'},
+  {n:'Mykonos',fast:'35–45 min',conv:'1h 15min',p:'~70 €'},
+  {n:'Koufonisia',fast:'40 min',conv:'2h (Skopelitis)',p:'~100 €'},
+  {n:'Ios',fast:'45 min',conv:'1h 10min',p:'~80 €'},
+];
+const CONTACTS = [
+  {t:'Emergencias Turquía',sub:'Número único europeo',tel:'112',ic:I.phone},
+  {t:'Emergencias Grecia',sub:'Número único europeo · UE',tel:'112',ic:I.phone},
+  {t:'Hotel Estambul · Galaxy',sub:'Oyuncu Sok. 33, Sultanahmet',tel:'',web:'https://booking.com/Share-C7A1Mmf',ic:I.bed},
+  {t:'Hotel Capadocia · Matiana View Cave',sub:'Aydınlı Sok. 1, Göreme',tel:'',web:'https://booking.com/Share-N1YGCh',ic:I.bed},
+  {t:'Hotel Atenas · Epidavros',sub:'Koumoundourou 14, Omonia',tel:'+302105230421',web:'https://epidavroshotel.eu',ic:I.bed},
+  {t:'Hotel Naxos · Korali Garden',sub:'Agios Georgios, Naxos Chora',tel:'+302285025709',web:'https://koraligarden.com',ic:I.bed},
+  {t:'Transfer IST → hotel',sub:'GetTransfer · Happy Life · 20 jun 22:00',tel:'+905379215637',ic:I.bus},
+  {t:'Transfer hotel → SAW',sub:'Istanbul Shuttle Port · 23 jun 04:30 · 52 € efectivo',tel:'+905428256454',ic:I.bus},
+  {t:'Crucero Bósforo',sub:'GetYourGuide · 22 jun 20:30 · embarque Kabataş 20:00',tel:'',web:'https://getyourguide.com',ic:I.ship},
+];
+
+/* ============== RENDER HELPERS ============== */
+const $ = s => document.querySelector(s);
+const el = (t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;};
+const cityBadge = c => `<span class="badge-city" style="background:${CITY[c].c}">${CITY[c].n}</span>`;
+const eur = n => (n<0?'−':'')+Math.abs(n).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+
+/* ============== TABS ============== */
+const TABS = [
+  {id:'inicio',label:'Inicio',ic:I.map},
+  {id:'plan',label:'Itinerario',ic:I.map},
+  {id:'logistica',label:'Vuelos & Hoteles',ic:I.plane},
+  {id:'dinero',label:'Dinero',ic:I.euro},
+  {id:'comida',label:'Comida',ic:I.food},
+  {id:'listas',label:'Listas',ic:I.check},
+  {id:'info',label:'Info',ic:I.info},
+];
+const tabsEl = $('#tabs');
+TABS.forEach((t,i)=>{
+  const b=el('button',i===0?'on':'',t.ic+'<span>'+t.label+'</span>');
+  b.onclick=()=>{
+    document.querySelectorAll('nav.tabs button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+    $('#v-'+t.id).classList.add('on');
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+  tabsEl.appendChild(b);
+});
+
+/* ============== COUNTDOWN ============== */
+function countdown(){
+  const now=new Date(); now.setHours(0,0,0,0);
+  const dep=new Date(TRIP.start+'T00:00:00');
+  const back=new Date(TRIP.end+'T23:59:59');
+  const diff=Math.round((dep-now)/86400000);
+  const num=$('#cdNum'), lbl=$('#cdLbl');
+  if(now>=dep && now<=back){ num.textContent='✈'; lbl.textContent='¡en ruta!'; }
+  else if(diff>0){ num.textContent=diff; lbl.textContent=diff===1?'día':'días'; }
+  else if(diff===0){ num.textContent='¡Hoy!'; num.style.fontSize='17px'; lbl.textContent='salida'; }
+  else { num.textContent='♥'; lbl.textContent='vuelta'; }
+}
+countdown();
+
+/* ============== INICIO ============== */
+function renderInicio(){
+  const v=$('#v-inicio');
+  // hero
+  const hero=el('div','hero');
+  hero.innerHTML=`<div class="route">Estambul · Capadocia<br>Atenas · Naxos</div>
+    <div class="dates">Sáb 20 jun – Jue 2 jul 2026 · 13 días</div>
+    <div class="who">
+      <span class="ava"><i style="background:#22b4c4">J</i>Javiera</span>
+      <span class="ava"><i style="background:#d39a3e">P</i>Paula</span>
+      <span class="ava"><i style="background:#d98a6a">C</i>Cecilia</span>
+    </div>`;
+  v.appendChild(hero);
+  // stats
+  const sr=el('div','stat-row');
+  STATS.forEach(s=>sr.appendChild(el('div','stat',`<div class="v">${s.v}</div><div class="k">${s.k}</div>`)));
+  v.appendChild(sr);
+  // route
+  v.appendChild(el('div','sec-title','La ruta'));
+  const rc=el('div','card flat');
+  ROUTE.forEach((r,i)=>{
+    rc.appendChild(el('div','leg',
+      `<div class="dot" style="background:${CITY[r.city].c}">${i+1}</div>
+       <div class="m"><b>${r.name}</b><span>${r.desc}</span></div>
+       <div class="n">${r.days}<br>${r.nights}</div>`));
+  });
+  v.appendChild(rc);
+  // next / reminders
+  v.appendChild(el('div','sec-title','Lo importante de los próximos días'));
+  const nc=el('div','card next');
+  const ul=el('ul');
+  NEXT.forEach(n=>ul.appendChild(el('li','',`<span class="tag">${n.tag}</span><span>${n.t}</span>`)));
+  nc.appendChild(ul); v.appendChild(nc);
+}
+
+/* ============== PLAN ============== */
+function renderPlan(){
+  const v=$('#v-plan');
+  v.appendChild(el('div','sec-title','Itinerario día a día'));
+  v.appendChild(el('div','sub','Toca un día para ver mañana, tarde, noche y transporte.'));
+  ITIN.forEach((d,idx)=>{
+    const day=el('div','day');
+    const [dd,mm]=d.date.split('/');
+    const mon=['','ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'][parseInt(mm)];
+    const tagHtml=d.tag?`<span class="pill info" style="font-size:9.5px;padding:2px 7px">${d.tag}</span>`:'';
+    day.innerHTML=`
+      <div class="day-head">
+        <div class="date"><div class="d">${dd}</div><div class="mo">${mon}</div></div>
+        <div class="ti"><b>${cityBadge(d.city)} ${tagHtml}</b><span>${d.dow} · ${d.hotel}</span></div>
+        <div class="chev">${I.chev}</div>
+      </div>
+      <div class="day-body">
+        <div class="slot"><div class="ic">${I.sun}</div><div class="tx"><b>Mañana</b>${d.m}</div></div>
+        <div class="slot"><div class="ic">${I.noon}</div><div class="tx"><b>Tarde</b>${d.a}</div></div>
+        <div class="slot"><div class="ic">${I.moon}</div><div class="tx"><b>Noche</b>${d.e}</div></div>
+        <div class="slot"><div class="ic">${I.bus}</div><div class="tx"><b>Transporte</b>${d.tr}</div></div>
+        ${d.note?`<div class="daynote">${d.note}</div>`:''}
+      </div>`;
+    day.querySelector('.day-head').onclick=()=>day.classList.toggle('open');
+    if(idx===0) day.classList.add('open');
+    v.appendChild(day);
+  });
+}
+
+/* ============== LOGISTICA ============== */
+function renderLog(){
+  const v=$('#v-logistica');
+  v.appendChild(el('div','sec-title','Vuelos'));
+  FLIGHTS.forEach(f=>{
+    const c=el('div','card fcard');
+    const pillCls=f.status==='Comprado'?'ok':'pend';
+    c.innerHTML=`
+      <div class="froute"><span class="ap">${f.from}</span>
+        <span class="arr">${f.stop?'<span class="plus">escala</span>':''}</span>
+        <span class="ap">${f.to}</span></div>
+      <div class="ftimes"><span><b>${f.dep}</b> · ${f.cityFrom}</span><span>${f.cityTo} · <b>${f.arr}</b></span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span style="font-size:13px;font-weight:600">${f.date} · ${f.airline}</span>
+        <span class="pill ${pillCls}">${f.status}</span></div>
+      <div class="fmeta">
+        <span>Loc. <b>${f.loc}</b></span><span>Equipaje <b>${f.bag}</b></span><span>Precio <b>${f.price}</b></span>
+      </div>
+      ${f.note?`<div class="daynote" style="margin-top:10px">${f.note}</div>`:''}`;
+    v.appendChild(c);
+  });
+
+  v.appendChild(el('div','sec-title','Hoteles'));
+  HOTELS.forEach(h=>{
+    const c=el('div','card hotel');
+    const pillCls=(h.status==='Reservado'||h.status==='Confirmada')?'ok':'pend';
+    c.innerHTML=`
+      <div class="hh"><div><h3>${h.name}</h3><div class="stay">${cityBadge(h.city)} ${h.inn} → ${h.out} · ${h.nights} noches</div></div>
+        <span class="pill ${pillCls}">${h.status}</span></div>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:9px">${h.addr}</div>
+      <div class="feat">${h.feats.map(f=>`<span class="t">${f}</span>`).join('')}
+        <span class="t" style="background:rgba(27,138,166,.1);color:var(--sea)"><b>${h.ppn}/noche · ${h.total}</b></span></div>
+      <a class="booklink" href="${h.link}" target="_blank">${I.bed} Ver reserva en Booking</a>
+      ${h.note?`<div class="daynote" style="margin-top:10px">${h.note}</div>`:''}`;
+    v.appendChild(c);
+  });
+
+  v.appendChild(el('div','sec-title','Traslados y transporte'));
+  const tc=el('div','card flat');
+  TRANSFERS_LOG.forEach(t=>{
+    const cls=t.status==='Pagado'?'ok':(t.status==='Reservado'?'info':'pend');
+    tc.appendChild(el('div','payitem',
+      `<div class="pc"><b>${t.t}</b><span>${t.op} · ${t.when}</span><span>${t.note}</span></div>
+       <div class="pv"><span class="pill ${cls}">${t.status}</span></div>`));
+  });
+  v.appendChild(tc);
+}
+
+/* ============== DINERO ============== */
+function renderMoney(){
+  const v=$('#v-dinero');
+  // total
+  v.appendChild(el('div','sec-title','Presupuesto total'));
+  const tb=el('div','total-bar');
+  tb.innerHTML=`<div><div class="tt">Total estimado</div><small>imprevistos ~10% incluidos</small></div>
+    <div style="text-align:right"><div class="tv">6.116 €</div><small>2.039 € por persona</small></div>`;
+  v.appendChild(tb);
+  // budget breakdown
+  const bc=el('div','card');
+  BUDGET.forEach(b=>bc.appendChild(el('div','bud',
+    `<div class="bic">${b.ic}</div><div class="bn">${b.cat}<span>${b.n}</span></div><div class="bv">${b.v}</div>`)));
+  v.appendChild(bc);
+
+  // balances
+  v.appendChild(el('div','sec-title','Cómo va la cuenta entre las 3'));
+  v.appendChild(el('div','sub','Saldo positivo = esa persona debe poner ese dinero. Negativo = se lo devuelven.'));
+  const colors={Paula:'#d39a3e',Cecilia:'#d98a6a',Javiera:'#22b4c4'};
+  BALANCES.forEach(b=>{
+    const cls=b.saldo>0?'owe':'get';
+    const txt=b.saldo>0?'debe poner':'le devuelven';
+    v.appendChild(el('div','balcard',
+      `<i style="background:${colors[b.name]}">${b.name[0]}</i>
+       <div class="nm"><b>${b.name}</b><span>${b.note}</span>
+         <span style="margin-top:4px">Le toca ${b.toca} · ha puesto ${b.puesto}</span></div>
+       <div class="amt ${cls}">${eur(Math.abs(b.saldo))}<div style="font-size:10px;font-weight:600;color:var(--muted);font-family:Inter">${txt}</div></div>`));
+  });
+
+  // transfers
+  v.appendChild(el('div','sec-title','Transferencias a realizar'));
+  const trc=el('div','card');
+  TRANSFERS_MONEY.forEach(t=>{
+    trc.appendChild(el('div','transfer',
+      `<div style="flex:1"><b>${t.from}</b> <span class="ar">→</span> <b>${t.to}</b>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:2px">${t.c}</div></div>
+       <div class="tamt">${t.amt}</div>`));
+  });
+  trc.appendChild(el('div','',`<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:2px solid var(--line)">
+    <b style="font-size:13px">Neto a favor de Javiera</b><span style="font-family:Fraunces;font-weight:700;font-size:18px;color:var(--good)">514,82 €</span></div>`));
+  v.appendChild(trc);
+
+  // payments
+  v.appendChild(el('div','sec-title','Estado de pagos'));
+  const pc=el('div','card flat');
+  PAYMENTS.forEach(p=>{
+    const cls=p.st==='Pagado'?'pay':(p.st==='Reservado'?'info':'pend');
+    pc.appendChild(el('div','payitem',
+      `<div class="pc"><b>${p.c}</b><span>${p.by!=='—'?'Pagado por '+p.by+' · ':''}${p.n}</span></div>
+       <div class="pv"><b>${p.amt}</b><div style="margin-top:4px"><span class="pill ${cls}">${p.st}</span></div></div>`));
+  });
+  v.appendChild(pc);
+}
+
+/* ============== COMIDA ============== */
+function renderFood(){
+  const v=$('#v-comida');
+  v.appendChild(el('div','sec-title','Dónde comer cada día'));
+  const c=el('div','card');
+  MEALS.forEach((m,i)=>{
+    const meal=el('div','meal');
+    if(i>0) meal.style.borderTop='1px solid var(--line)', meal.style.paddingTop='12px';
+    meal.innerHTML=`
+      <div class="mh"><span class="md">${m.date}</span><span class="mc">${m.city}</span></div>
+      <div class="row"><span class="lab">Comida</span><span>${m.lunch}</span></div>
+      <div class="row"><span class="lab">Cena</span><span>${m.dinner}</span></div>`;
+    c.appendChild(meal);
+  });
+  v.appendChild(c);
+
+  v.appendChild(el('div','sec-title','Qué probar'));
+  Object.entries(DISHES).forEach(([title,arr])=>{
+    const card=el('div','card');
+    card.appendChild(el('div','',`<div style="font-family:Fraunces;font-weight:700;font-size:16px;color:var(--sea);margin-bottom:8px">${title}</div>`));
+    arr.forEach(d=>card.appendChild(el('div','dish',`<b>${d.n}</b><span>${d.d}</span>`)));
+    v.appendChild(card);
+  });
+}
+
+/* ============== LISTAS (interactive) ============== */
+function checkSVG(){return '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';}
+function loadState(key){try{return JSON.parse(localStorage.getItem(key))||{};}catch(e){return {};}}
+function saveState(key,obj){localStorage.setItem(key,JSON.stringify(obj));}
+
+function renderCheckList(view, items, key, hasDefaults){
+  const state=loadState(key);
+  const wrap=el('div','card flat');
+  const bar=el('div','progress'); const fill=el('i'); bar.appendChild(fill);
+  const counter=el('div','sub');
+  function update(){
+    let done=0;
+    items.forEach((it,i)=>{
+      const id=key+'_'+i;
+      let checked = (id in state)? state[id] : (hasDefaults? !!it.done : false);
+      if(checked) done++;
+    });
+    const pct=Math.round(done/items.length*100);
+    fill.style.width=pct+'%';
+    counter.textContent=`${done} de ${items.length} · ${pct}%`;
+  }
+  items.forEach((it,i)=>{
+    const id=key+'_'+i;
+    let checked = (id in state)? state[id] : (hasDefaults? !!it.done : false);
+    const row=el('div','chk'+(checked?' done':''));
+    row.innerHTML=`<div class="box">${checkSVG()}</div>
+      <div class="ct"><b>${it.t}</b>${it.n?`<span>${it.n}</span>`:''}</div>
+      <span class="cat">${it.cat}</span>`;
+    row.onclick=()=>{
+      const now=!row.classList.contains('done');
+      row.classList.toggle('done',now);
+      state[id]=now; saveState(key,state); update();
+    };
+    wrap.appendChild(row);
+  });
+  view.appendChild(bar);
+  view.appendChild(counter);
+  view.appendChild(wrap);
+  const reset=el('button','reset','Reiniciar esta lista');
+  reset.onclick=()=>{ if(confirm('¿Reiniciar las marcas de esta lista?')){localStorage.removeItem(key);renderListas(true);} };
+  view.appendChild(reset);
+  update();
+}
+function renderListas(force){
+  const v=$('#v-listas');
+  if(force) v.innerHTML='';
+  v.appendChild(el('div','sec-title','Checklist de tareas'));
+  v.appendChild(el('div','sub','Se guarda en este móvil. Pendientes de la hoja marcadas según su estado.'));
+  renderCheckList(v, TASKS, 'trip_tasks', true);
+  v.appendChild(el('div','sec-title','Maleta'));
+  renderCheckList(v, PACK, 'trip_pack', false);
+}
+
+/* ============== INFO ============== */
+function renderInfo(){
+  const v=$('#v-info');
+  v.appendChild(el('div','sec-title','Notas prácticas'));
+  const nc=el('div','card');
+  NOTES.forEach(n=>nc.appendChild(el('div','note',`<span class="ni">${I.info}</span><span>${n}</span>`)));
+  v.appendChild(nc);
+
+  v.appendChild(el('div','sec-title','Qué ver en cada destino'));
+  Object.entries(ACTS).forEach(([city,arr])=>{
+    const c=el('div','card');
+    c.appendChild(el('div','',`<div style="font-family:Fraunces;font-weight:700;font-size:16px;color:var(--sea);margin-bottom:6px">${city}</div>`));
+    arr.forEach(a=>c.appendChild(el('div','act',`<b>${a.n}</b><p>${a.d}</p>`)));
+    v.appendChild(c);
+  });
+
+  v.appendChild(el('div','sec-title','Ferries desde Naxos (opcional)'));
+  v.appendChild(el('div','sub','Precio aprox. ida y vuelta por persona.'));
+  const fc=el('div','card flat');
+  fc.appendChild(el('div','',`<div style="display:flex;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding-bottom:6px;border-bottom:1px solid var(--line)"><span style="flex:1">Isla</span><span style="width:70px">Rápido</span><span style="width:55px;text-align:right">Precio</span></div>`));
+  FERRIES.forEach(f=>fc.appendChild(el('div','ferry',
+    `<b>${f.n}</b><span class="ft" style="width:70px">${f.fast}<br>${f.conv}</span><span class="fp" style="width:55px;text-align:right">${f.p}</span>`)));
+  v.appendChild(fc);
+
+  v.appendChild(el('div','sec-title','Contactos y reservas'));
+  const cc=el('div','card flat');
+  CONTACTS.forEach(c=>{
+    const acts=[];
+    if(c.tel) acts.push(`<a href="tel:${c.tel}">${I.phone}</a>`);
+    if(c.web) acts.push(`<a href="${c.web}" target="_blank">${I.globe}</a>`);
+    cc.appendChild(el('div','contact',
+      `<div class="ci">${c.ic}</div>
+       <div class="cd"><b>${c.t}</b><span>${c.sub}</span></div>
+       <div class="cact">${acts.join('')}</div>`));
+  });
+  v.appendChild(cc);
+}
+
+/* ============== INIT ============== */
+renderInicio();
+renderPlan();
+renderLog();
+renderMoney();
+renderFood();
+renderListas();
+renderInfo();
+</script>
+</body>
+</html>

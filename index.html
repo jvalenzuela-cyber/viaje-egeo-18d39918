@@ -189,6 +189,27 @@
   .payitem .pc span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
   .payitem .pv{text-align:right;white-space:nowrap}
   .payitem .pv b{font-family:'Fraunces',serif;font-size:14px}
+  /* resumen pagado/pendiente */
+  .paysum{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow);margin-bottom:12px}
+  .paysum .bar{height:10px;border-radius:999px;background:rgba(208,90,78,.16);overflow:hidden;margin-bottom:10px}
+  .paysum .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--good),#2fb6c4);transition:width .4s}
+  .paysum .legend{display:flex;justify-content:space-between;font-size:12.5px}
+  .paysum .legend .k{color:var(--muted)}
+  .paysum .legend b{font-family:'Fraunces',serif;font-size:15px;display:block;margin-top:1px}
+  .paysum .legend .paid b{color:var(--good)} .paysum .legend .pend b{color:var(--bad)}
+  /* item pagable (checkable) */
+  .paychk{display:flex;gap:11px;align-items:flex-start;padding:11px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+  .paychk:last-child{border-bottom:0}
+  .paychk .box{flex:0 0 auto;width:22px;height:22px;border-radius:7px;border:2px solid var(--line);display:grid;place-items:center;transition:.15s;margin-top:1px;background:#fff}
+  .paychk.done .box{background:var(--good);border-color:var(--good)}
+  .paychk .box svg{opacity:0;transition:.15s}
+  .paychk.done .box svg{opacity:1}
+  .paychk .pc{flex:1;min-width:0}
+  .paychk .pc b{font-size:13.5px}
+  .paychk .pc span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+  .paychk .pv{text-align:right;white-space:nowrap;font-family:'Fraunces',serif;font-weight:700;font-size:14px;color:var(--bad)}
+  .paychk.done .pv{color:var(--good)}
+  .paychk .pv small{display:block;font-family:'Inter';font-weight:600;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-top:2px}
 
   /* ---------- Food ---------- */
   .meal{margin-bottom:12px}
@@ -443,16 +464,16 @@ const BUDGET = [
   {cat:'Compras / souvenirs',v:'200 €',n:'bazares, regalos',ic:I.euro},
 ];
 const PAYMENTS = [
-  {c:'Vuelos BCN-IST · IST-NAV · NAV-ATH (3 pax)',by:'Javiera',amt:'1.027 €',st:'Pagado',n:'3 tramos'},
-  {c:'Vuelos ATH-Naxos · Naxos-BCN (3 pax)',by:'Cecilia',amt:'789 €',st:'Pagado',n:'2 tramos'},
-  {c:'Transfer IST → hotel',by:'Javiera',amt:'52 €',st:'Pagado',n:'GetTransfer #24478211'},
-  {c:'Crucero Bósforo (3 pax)',by:'Javiera',amt:'75,60 €',st:'Pagado',n:'GetYourGuide · 19 jun'},
-  {c:'Entradas Acrópolis (3 pax)',by:'Javiera',amt:'90 €',st:'Pagado',n:'28 jun 11:00 · A-1192049/50/51'},
-  {c:'Globo Capadocia (3 pax)',by:'Javiera',amt:'407,16 €',st:'Pagado',n:'24 jun · 135,72 €/pax · cargo 22/06'},
-  {c:'Transfer Capadocia → Göreme (3 pax)',by:'Javiera',amt:'28,47 €',st:'Pagado',n:'Viator · 9,49 €/pax · vuelta sin reservar'},
-  {c:'Transfer hotel → SAW',by:'—',amt:'52 €',st:'Pendiente',n:'efectivo al conductor 23 jun'},
-  {c:'Alojamiento (4 hoteles)',by:'—',amt:'935,46 €',st:'Pendiente',n:'pagar/confirmar in situ'},
-  {c:'Free tours Estambul y Atenas',by:'—',amt:'0 € + propina',st:'Reservado',n:'Civitatis · a voluntad ~5–10 €/pax'},
+  {c:'Vuelos BCN-IST · IST-NAV · NAV-ATH (3 pax)',by:'Javiera',amt:'1.027 €',val:1027,st:'Pagado',n:'3 tramos'},
+  {c:'Vuelos ATH-Naxos · Naxos-BCN (3 pax)',by:'Cecilia',amt:'789 €',val:789,st:'Pagado',n:'2 tramos'},
+  {c:'Transfer IST → hotel',by:'Javiera',amt:'52 €',val:52,st:'Pagado',n:'GetTransfer #24478211'},
+  {c:'Crucero Bósforo (3 pax)',by:'Javiera',amt:'75,60 €',val:75.60,st:'Pagado',n:'GetYourGuide · 19 jun'},
+  {c:'Entradas Acrópolis (3 pax)',by:'Javiera',amt:'90 €',val:90,st:'Pagado',n:'28 jun 11:00 · A-1192049/50/51'},
+  {c:'Globo Capadocia (3 pax)',by:'Javiera',amt:'407,16 €',val:407.16,st:'Pagado',n:'24 jun · 135,72 €/pax · cargo 22/06'},
+  {c:'Transfer Capadocia → Göreme (3 pax)',by:'Javiera',amt:'28,47 €',val:28.47,st:'Pagado',n:'Viator · 9,49 €/pax · vuelta sin reservar'},
+  {c:'Transfer hotel → SAW',by:'—',amt:'52 €',val:52,st:'Pendiente',n:'efectivo al conductor 23 jun'},
+  {c:'Alojamiento (4 hoteles)',by:'—',amt:'935,46 €',val:935.46,st:'Pendiente',n:'pagar/confirmar in situ'},
+  {c:'Free tours Estambul y Atenas',by:'—',amt:'0 € + propina',val:0,st:'Reservado',n:'Civitatis · a voluntad ~5–10 €/pax'},
 ];
 
 /* ----- food ----- */
@@ -811,16 +832,39 @@ function renderMoney(){
     <b style="font-size:13px">Neto a favor de Javiera</b><span style="font-family:Fraunces;font-weight:700;font-size:18px;color:var(--good)">514,82 €</span></div>`));
   v.appendChild(trc);
 
-  // payments
+  // payments (check interactivo)
   v.appendChild(el('div','sec-title','Estado de pagos'));
+  v.appendChild(el('div','sub','Marca lo que ya está pagado. Se guarda en este móvil y el resumen se recalcula solo.'));
+  const KEY='trip_pagos';
+  const state=loadState(KEY);
+  const isPaid = (p,i) => { const id=KEY+'_'+i; return (id in state)? state[id] : (p.st==='Pagado'); };
+  // resumen
+  const sum=el('div','paysum');
+  sum.innerHTML=`<div class="bar"><i></i></div>
+    <div class="legend"><span class="paid"><span class="k">Pagado</span><b></b></span>
+    <span class="pend" style="text-align:right"><span class="k">Pendiente</span><b></b></span></div>`;
+  v.appendChild(sum);
+  const fill=sum.querySelector('.bar i');
+  const paidB=sum.querySelector('.paid b'), pendB=sum.querySelector('.pend b');
+  function updateSum(){
+    let paid=0,total=0;
+    PAYMENTS.forEach((p,i)=>{ total+=p.val; if(isPaid(p,i)) paid+=p.val; });
+    paidB.textContent=eur(paid); pendB.textContent=eur(total-paid);
+    fill.style.width=(total? (paid/total*100):0)+'%';
+  }
+  // lista
   const pc=el('div','card flat');
-  PAYMENTS.forEach(p=>{
-    const cls=p.st==='Pagado'?'pay':(p.st==='Reservado'?'info':'pend');
-    pc.appendChild(el('div','payitem',
-      `<div class="pc"><b>${p.c}</b><span>${p.by!=='—'?'Pagado por '+p.by+' · ':''}${p.n}</span></div>
-       <div class="pv"><b>${p.amt}</b><div style="margin-top:4px"><span class="pill ${cls}">${p.st}</span></div></div>`));
+  PAYMENTS.forEach((p,i)=>{
+    const id=KEY+'_'+i;
+    const row=el('div','paychk'+(isPaid(p,i)?' done':''));
+    row.innerHTML=`<div class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <div class="pc"><b>${p.c}</b><span>${p.by!=='—'?'Pagado por '+p.by+' · ':''}${p.n}</span></div>
+      <div class="pv">${p.amt}</div>`;
+    row.onclick=()=>{ const now=!row.classList.contains('done'); row.classList.toggle('done',now); state[id]=now; saveState(KEY,state); updateSum(); };
+    pc.appendChild(row);
   });
   v.appendChild(pc);
+  updateSum();
 }
 
 /* ============== COMIDA ============== */

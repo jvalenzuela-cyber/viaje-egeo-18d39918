@@ -92,6 +92,17 @@
   .ava{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);padding:5px 11px 5px 5px;border-radius:999px;font-size:12.5px;font-weight:600}
   .ava i{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:700;color:#05323f}
 
+  .budget-hero{background:linear-gradient(135deg,#0a3d52,#1b8aa6);color:#fff;border-radius:16px;padding:16px 18px;box-shadow:var(--shadow);margin-bottom:16px;position:relative;overflow:hidden}
+  .budget-hero::after{content:"";position:absolute;right:-30px;bottom:-40px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(7,212,161,.4),transparent 70%)}
+  .budget-hero>*{position:relative}
+  .budget-hero .bh-top{display:flex;justify-content:space-between;align-items:center}
+  .budget-hero .bh-lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#cdeaf1;font-weight:600}
+  .budget-hero .bh-rate{font-size:10.5px;color:#cdeaf1;background:rgba(255,255,255,.14);padding:3px 9px;border-radius:8px;font-weight:600}
+  .budget-hero .bh-clp{font-family:'Fraunces',serif;font-size:33px;font-weight:700;line-height:1.05;margin-top:7px}
+  .budget-hero .bh-eur{font-size:12.5px;color:#cdeaf1;margin-top:3px}
+  .budget-hero .bh-pp{margin-top:12px;padding-top:11px;border-top:1px solid rgba(255,255,255,.18);font-size:13px;color:#eaf6f9;display:flex;align-items:baseline;gap:7px}
+  .budget-hero .bh-pp b{font-family:'Fraunces',serif;font-size:17px}
+  .budget-hero .bh-pp .sec{color:#bfe3ec;margin-left:auto;font-size:12px}
   .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
   .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 12px;text-align:center;box-shadow:var(--shadow)}
   .stat .v{font-family:'Fraunces',serif;font-size:21px;font-weight:700;color:var(--sea)}
@@ -315,8 +326,11 @@ const STATS = [
   {v:'13', k:'días'},
   {v:'4', k:'destinos'},
   {v:'5', k:'vuelos'},
-  {v:'2.039 €', k:'por persona'},
 ];
+const TOTALS = {
+  clp_total:'$6.385.146', eur_total:'6.116 €',
+  clp_pp:'$2.128.382', eur_pp:'2.039 €', rate:'1 € ≈ 1.044 CLP',
+};
 
 const ROUTE = [
   {city:'EST', name:'Estambul', days:'20–23 jun', nights:'3 noches', img:'est_hero', desc:'Casco histórico (Sultanahmet) y Bósforo. Llegada el 20 por la noche.'},
@@ -345,7 +359,7 @@ const FLIGHTS = [
 
 const HOTELS = [
   {city:'EST',name:'Galaxy Hotel Sultanahmet',inn:'20/06',out:'23/06',nights:3,ppn:'48 €',total:'144 €',status:'Reservado',feats:['Desayuno incluido','Sultanahmet (Fatih)'],addr:'Oyuncu Sok. 33, Sultanahmet',link:'https://booking.com/Share-C7A1Mmf',note:''},
-  {city:'CAP',name:'Matiana View Cave',inn:'23/06',out:'26/06',nights:3,ppn:'124,82 €',total:'374,46 €',status:'Confirmada',feats:['Hotel cueva','Göreme','Cancelación gratis'],addr:'Aydınlı Sok. 1, 50180 Göreme',link:'https://booking.com/Share-N1YGCh',note:'⚠ La pestaña de presupuesto aún figura como "Sato Cave Hotel": confirmar cuál es el hotel definitivo y el desayuno.'},
+  {city:'CAP',name:'Sato Cave Hotel',inn:'23/06',out:'26/06',nights:3,ppn:'124,82 €',total:'374,46 €',status:'Confirmada',feats:['Hotel cueva','Göreme','Desayuno incluido','Cancelación gratis'],addr:'Orta Mah. Konak Sok. 7, 50180 Göreme',link:'',note:'Tel: +90 384 271 2417'},
   {city:'ATH',name:'Epidavros Hotel',inn:'26/06',out:'29/06',nights:3,ppn:'54,67 €',total:'164 €',status:'Reservado',feats:['Sin desayuno','Omonia'],addr:'Koumoundourou 14, 10437 Atenas',link:'https://booking.com/Share-nNF1iF',note:'Tel: +30 210 523 0421'},
   {city:'NAX',name:'Korali Garden',inn:'29/06',out:'02/07',nights:3,ppn:'84,33 €',total:'253 €',status:'Reservado',feats:['Sin desayuno','Playa St. George'],addr:'Agios Georgios, 84300 Naxos (Chora)',link:'https://booking.com/Share-R0qR2F',note:'Tel: +30 22850 25709'},
 ];
@@ -373,14 +387,14 @@ const ITIN = [
     m:'Palacio de Topkapı', a:'Gran Bazar y paseo por Karaköy/Gálata (vistas y atardecer)',
     e:'Crucero Bósforo con cena 20:30 (reservado · embarque Kabataş 20:00)', tr:'Tranvía / metro / a pie',
     note:'Crucero GetYourGuide GYGN6B4QLAX3 · pagado.'},
-  {date:'23/06',dow:'Martes',city:'CAP',tag:'LLEGADA',hotel:'Matiana View Cave',
+  {date:'23/06',dow:'Martes',city:'CAP',tag:'LLEGADA',hotel:'Sato Cave Hotel',
     m:'Traslado hotel→SAW 04:30 · Vuelo SAW→Nevşehir 07:45 · traslado a Göreme',
     a:'Museo al aire libre de Göreme', e:'Cena con vistas a los valles', tr:'AJET VF3268 + traslado',
     note:'⚠ Sale de SAW (lado asiático). Transfer 04:30 (Istanbul Shuttle Port, 52 € efectivo). Ref 43B6K1.'},
-  {date:'24/06',dow:'Miércoles',city:'CAP',tag:'',hotel:'Matiana View Cave',
+  {date:'24/06',dow:'Miércoles',city:'CAP',tag:'',hotel:'Sato Cave Hotel',
     m:'GLOBO al amanecer (~05:00)', a:'Valle Rojo y Rosa, Uçhisar', e:'Atardecer en mirador', tr:'Tour / quad / coche',
     note:'Globo reservado (Fairychimneys vía Viator). Llevar abrigo.'},
-  {date:'25/06',dow:'Jueves',city:'CAP',tag:'',hotel:'Matiana View Cave',
+  {date:'25/06',dow:'Jueves',city:'CAP',tag:'',hotel:'Sato Cave Hotel',
     m:'Ciudad subterránea (Derinkuyu/Kaymaklı)', a:'Valle del Amor o Valle de Ihlara', e:'Noche en Göreme', tr:'Tour / coche', note:''},
   {date:'26/06',dow:'Viernes',city:'ATH',tag:'LLEGADA',hotel:'Epidavros Hotel',
     m:'Mañana libre en Capadocia', a:'Vuelo Nevşehir→Atenas 15:50 (con escala)', e:'Llegada ~22:25 · traslado al hotel',
@@ -577,7 +591,7 @@ const CONTACTS = [
   {t:'Emergencias Turquía',sub:'Número único europeo',tel:'112',ic:I.phone},
   {t:'Emergencias Grecia',sub:'Número único europeo · UE',tel:'112',ic:I.phone},
   {t:'Hotel Estambul · Galaxy',sub:'Oyuncu Sok. 33, Sultanahmet',tel:'',web:'https://booking.com/Share-C7A1Mmf',ic:I.bed},
-  {t:'Hotel Capadocia · Matiana View Cave',sub:'Aydınlı Sok. 1, Göreme',tel:'',web:'https://booking.com/Share-N1YGCh',ic:I.bed},
+  {t:'Hotel Capadocia · Sato Cave Hotel',sub:'Orta Mah. Konak Sok. 7, Göreme',tel:'+903842712417',web:'',ic:I.bed},
   {t:'Hotel Atenas · Epidavros',sub:'Koumoundourou 14, Omonia',tel:'+302105230421',web:'https://epidavroshotel.eu',ic:I.bed},
   {t:'Hotel Naxos · Korali Garden',sub:'Agios Georgios, Naxos Chora',tel:'+302285025709',web:'https://koraligarden.com',ic:I.bed},
   {t:'Transfer IST → hotel',sub:'GetTransfer · Happy Life · 20 jun 22:00',tel:'+905379215637',ic:I.bus},
@@ -646,6 +660,14 @@ function renderInicio(){
   const sr=el('div','stat-row');
   STATS.forEach(s=>sr.appendChild(el('div','stat',`<div class="v">${s.v}</div><div class="k">${s.k}</div>`)));
   v.appendChild(sr);
+  // budget (CLP)
+  const bh=el('div','budget-hero');
+  bh.innerHTML=`
+    <div class="bh-top"><span class="bh-lbl">Total del viaje · 3 personas</span><span class="bh-rate">${TOTALS.rate}</span></div>
+    <div class="bh-clp">${TOTALS.clp_total}</div>
+    <div class="bh-eur">${TOTALS.eur_total} · estimado, imprevistos ~10% incluidos</div>
+    <div class="bh-pp">Por persona <b>${TOTALS.clp_pp}</b><span class="sec">${TOTALS.eur_pp}</span></div>`;
+  v.appendChild(bh);
   // route (photo cards)
   v.appendChild(el('div','sec-title','La ruta'));
   ROUTE.forEach((r,i)=>{
@@ -729,7 +751,7 @@ function renderLog(){
       <div style="font-size:12.5px;color:var(--muted);margin-top:9px">${h.addr}</div>
       <div class="feat">${h.feats.map(f=>`<span class="t">${f}</span>`).join('')}
         <span class="t" style="background:rgba(27,138,166,.1);color:var(--sea)"><b>${h.ppn}/noche · ${h.total}</b></span></div>
-      <a class="booklink" href="${h.link}" target="_blank">${I.bed} Ver reserva en Booking</a>
+      ${h.link?`<a class="booklink" href="${h.link}" target="_blank">${I.bed} Ver reserva en Booking</a>`:''}
       ${h.note?`<div class="daynote" style="margin-top:10px">${h.note}</div>`:''}`;
     v.appendChild(c);
   });
@@ -802,6 +824,18 @@ function renderMoney(){
 /* ============== COMIDA ============== */
 function renderFood(){
   const v=$('#v-comida');
+  // 1) Qué probar (con fotos)
+  v.appendChild(el('div','sec-title','Qué probar'));
+  Object.entries(DISHES).forEach(([title,arr])=>{
+    const card=el('div','card');
+    card.appendChild(el('div','',`<div style="font-family:Fraunces;font-weight:700;font-size:16px;color:var(--sea);margin-bottom:8px">${title}</div>`));
+    arr.forEach(d=>card.appendChild(el('div','dish hasimg',
+      `<div class="thumb">${photo(d.img, d.n)}</div>
+       <div class="meta"><b>${d.n}</b><span>${d.d}</span></div>`)));
+    v.appendChild(card);
+  });
+
+  // 2) Dónde comer cada día
   v.appendChild(el('div','sec-title','Dónde comer cada día'));
   const c=el('div','card');
   MEALS.forEach((m,i)=>{
@@ -814,16 +848,6 @@ function renderFood(){
     c.appendChild(meal);
   });
   v.appendChild(c);
-
-  v.appendChild(el('div','sec-title','Qué probar'));
-  Object.entries(DISHES).forEach(([title,arr])=>{
-    const card=el('div','card');
-    card.appendChild(el('div','',`<div style="font-family:Fraunces;font-weight:700;font-size:16px;color:var(--sea);margin-bottom:8px">${title}</div>`));
-    arr.forEach(d=>card.appendChild(el('div','dish hasimg',
-      `<div class="thumb">${photo(d.img, d.n)}</div>
-       <div class="meta"><b>${d.n}</b><span>${d.d}</span></div>`)));
-    v.appendChild(card);
-  });
 }
 
 /* ============== LISTAS (interactive) ============== */

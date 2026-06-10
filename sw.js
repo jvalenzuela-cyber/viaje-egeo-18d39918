@@ -1,5 +1,7 @@
-/* Service worker — cachea la app y las fotos para uso offline en destino. */
-const CACHE = 'viaje-egeo-v1';
+/* Service worker — offline en destino, pero siempre la última versión si hay conexión.
+   Estrategia: HTML network-first (refresca al regenerar la app); imágenes/estáticos cache-first. */
+const VERSION = 'v2';
+const CACHE = 'viaje-egeo-' + VERSION;
 const IMG_KEYS = [
   'est_hero','cap_hero','ath_hero','nax_hero',
   'act_bosforo','act_cisterna','act_mezquita','act_topkapi','act_granbazar','act_galata',
@@ -21,13 +23,27 @@ self.addEventListener('activate', e => {
   );
 });
 self.addEventListener('fetch', e => {
-  if (e.request.method !== 'GET') return;
-  // cache-first para todo (app estática + fotos); fuentes de Google se cachean al vuelo
+  const req = e.request;
+  if (req.method !== 'GET') return;
+  const isHTML = req.mode === 'navigate' ||
+                 (req.headers.get('accept') || '').includes('text/html');
+  if (isHTML) {
+    // network-first: si hay red, trae lo último y lo cachea; si no, sirve cache
+    e.respondWith(
+      fetch(req).then(res => {
+        const copy = res.clone();
+        caches.open(CACHE).then(c => c.put('./index.html', copy)).catch(()=>{});
+        return res;
+      }).catch(() => caches.match(req).then(hit => hit || caches.match('./index.html')))
+    );
+    return;
+  }
+  // resto (fotos, fuentes): cache-first
   e.respondWith(
-    caches.match(e.request).then(hit => hit || fetch(e.request).then(res => {
+    caches.match(req).then(hit => hit || fetch(req).then(res => {
       const copy = res.clone();
-      caches.open(CACHE).then(c => { try { c.put(e.request, copy); } catch (_) {} });
+      caches.open(CACHE).then(c => { try { c.put(req, copy); } catch (_) {} });
       return res;
-    }).catch(() => caches.match('./index.html')))
+    }).catch(() => undefined))
   );
 });

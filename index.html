@@ -228,6 +228,26 @@
   .act b{font-size:14px}
   .act p{margin:3px 0 0;font-size:12.5px;color:var(--muted)}
 
+  /* ---------- Photos ---------- */
+  img.ph{background:rgba(10,61,82,.06);opacity:0;transition:opacity .4s ease}
+  img.ph.loaded{opacity:1}
+  /* destino con foto de cabecera (Inicio) */
+  .rcard{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:12px;background:var(--card)}
+  .rcard .cover{position:relative;height:130px;overflow:hidden}
+  .rcard .cover img{width:100%;height:100%;object-fit:cover;display:block}
+  .rcard .cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,36,44,.05) 30%,rgba(10,36,44,.78))}
+  .rcard .ov{position:absolute;left:14px;bottom:10px;right:14px;display:flex;align-items:flex-end;justify-content:space-between;gap:10px;z-index:2}
+  .rcard .ov .nm{color:#fff}
+  .rcard .ov .nm .num{font-family:'Fraunces',serif;font-size:12px;font-weight:700;opacity:.85;letter-spacing:.04em}
+  .rcard .ov .nm b{font-family:'Fraunces',serif;font-size:22px;font-weight:600;display:block;line-height:1.05;text-shadow:0 1px 8px rgba(0,0,0,.35)}
+  .rcard .ov .when{color:#fff;text-align:right;font-size:11px;font-weight:600;background:rgba(0,0,0,.28);padding:4px 9px;border-radius:8px;backdrop-filter:blur(3px);white-space:nowrap}
+  .rcard .desc{padding:10px 14px 13px;font-size:12.5px;color:var(--muted)}
+  /* miniatura en lista (sitios y platos) */
+  .thumb{flex:0 0 auto;width:74px;height:74px;border-radius:12px;overflow:hidden;background:rgba(10,61,82,.06)}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .act.hasimg,.dish.hasimg{display:flex;gap:12px;align-items:flex-start}
+  .act.hasimg .meta,.dish.hasimg .meta{flex:1;min-width:0}
+
   .sub{font-size:12.5px;color:var(--muted);margin:-4px 2px 12px}
   .footer{text-align:center;font-size:11px;color:var(--muted);margin-top:30px;padding-top:16px;border-top:1px solid var(--line)}
 </style>
@@ -299,10 +319,10 @@ const STATS = [
 ];
 
 const ROUTE = [
-  {city:'EST', name:'Estambul', days:'20–23 jun', nights:'3 noches', desc:'Casco histórico (Sultanahmet) y Bósforo. Llegada el 20 por la noche.'},
-  {city:'CAP', name:'Capadocia', days:'23–26 jun', nights:'3 noches', desc:'Göreme: globo al amanecer, valles y ciudades subterráneas.'},
-  {city:'ATH', name:'Atenas', days:'26–29 jun', nights:'3 noches', desc:'Acrópolis, casco antiguo y museos. Llegada el 26 por la noche.'},
-  {city:'NAX', name:'Naxos', days:'29 jun–2 jul', nights:'3 noches', desc:'Playas, pueblos y saltos en ferry a otras islas (opcional).'},
+  {city:'EST', name:'Estambul', days:'20–23 jun', nights:'3 noches', img:'est_hero', desc:'Casco histórico (Sultanahmet) y Bósforo. Llegada el 20 por la noche.'},
+  {city:'CAP', name:'Capadocia', days:'23–26 jun', nights:'3 noches', img:'cap_hero', desc:'Göreme: globo al amanecer, valles y ciudades subterráneas.'},
+  {city:'ATH', name:'Atenas', days:'26–29 jun', nights:'3 noches', img:'ath_hero', desc:'Acrópolis, casco antiguo y museos. Llegada el 26 por la noche.'},
+  {city:'NAX', name:'Naxos', days:'29 jun–2 jul', nights:'3 noches', img:'nax_hero', desc:'Playas, pueblos y saltos en ferry a otras islas (opcional).'},
 ];
 
 /* upcoming / key reminders shown on home */
@@ -438,22 +458,22 @@ const MEALS = [
 ];
 const DISHES = {
   'Turquía · Estambul y Capadocia':[
-    {n:'Kahvaltı (desayuno turco)',d:'El gran desayuno de quesos, aceitunas, huevos y mermeladas. Una experiencia en sí mismo.'},
-    {n:'Balık ekmek',d:'Bocadillo de pescado a la plancha junto al puente de Gálata. Callejero e icónico.'},
-    {n:'İskender kebab',d:'Láminas de döner sobre pan, con salsa de tomate y yogur.'},
-    {n:'Testi kebab',d:'Guiso de carne en olla de barro sellada que se rompe en la mesa. TÍPICO de Capadocia (encárgalo con antelación).'},
-    {n:'Mantı',d:'Raviolis turcos con yogur y mantequilla de pimentón.'},
-    {n:'Köfte',d:'Albóndigas a la brasa (las de Sultanahmet tienen fama).'},
-    {n:'Baklava y künefe',d:'Los dulces estrella. El künefe, queso con masa kadayıf y almíbar, caliente.'},
-    {n:'Para picar',d:'Çay (té), café turco, simit, lokum y dondurma (helado elástico).'},
+    {n:'Kahvaltı (desayuno turco)',img:'d_kahvalti',d:'El gran desayuno de quesos, aceitunas, huevos y mermeladas. Una experiencia en sí mismo.'},
+    {n:'Balık ekmek',img:'d_balik',d:'Bocadillo de pescado a la plancha junto al puente de Gálata. Callejero e icónico.'},
+    {n:'İskender kebab',img:'d_iskender',d:'Láminas de döner sobre pan, con salsa de tomate y yogur.'},
+    {n:'Testi kebab',img:'d_testi',d:'Guiso de carne en olla de barro sellada que se rompe en la mesa. TÍPICO de Capadocia (encárgalo con antelación).'},
+    {n:'Mantı',img:'d_manti',d:'Raviolis turcos con yogur y mantequilla de pimentón.'},
+    {n:'Köfte',img:'d_kofte',d:'Albóndigas a la brasa (las de Sultanahmet tienen fama).'},
+    {n:'Baklava y künefe',img:'d_baklava',d:'Los dulces estrella. El künefe, queso con masa kadayıf y almíbar, caliente.'},
+    {n:'Para picar',img:'d_simit',d:'Çay (té), café turco, simit, lokum y dondurma (helado elástico).'},
   ],
   'Grecia · Atenas y Naxos':[
-    {n:'Souvlaki y gyros',d:'La comida callejera griega por excelencia (en Monastiraki).'},
-    {n:'Moussaka',d:'Pastel de berenjena, carne picada y bechamel.'},
-    {n:'Mezze de mesa',d:'Tzatziki, ensalada griega (horiatiki) y dolmades.'},
-    {n:'Pulpo a la brasa y saganaki',d:'Queso frito. Imprescindibles junto al mar.'},
-    {n:'Especialidades de Naxos',d:'Quesos locales (graviera, arseniko), patatas de Naxos y kítron (licor de cidra).'},
-    {n:'Dulces',d:'Loukoumades (buñuelos con miel) y galaktoboureko (pastel de crema).'},
+    {n:'Souvlaki y gyros',img:'d_souvlaki',d:'La comida callejera griega por excelencia (en Monastiraki).'},
+    {n:'Moussaka',img:'d_moussaka',d:'Pastel de berenjena, carne picada y bechamel.'},
+    {n:'Mezze de mesa',img:'d_tzatziki',d:'Tzatziki, ensalada griega (horiatiki) y dolmades.'},
+    {n:'Pulpo a la brasa y saganaki',img:'d_saganaki',d:'Queso frito. Imprescindibles junto al mar.'},
+    {n:'Especialidades de Naxos',img:'d_graviera',d:'Quesos locales (graviera, arseniko), patatas de Naxos y kítron (licor de cidra).'},
+    {n:'Dulces',img:'d_loukoumades',d:'Loukoumades (buñuelos con miel) y galaktoboureko (pastel de crema).'},
   ],
 };
 
@@ -519,32 +539,32 @@ const NOTES = [
 ];
 const ACTS = {
   'Estambul':[
-    {n:'Crucero por el Bósforo',d:'Paseo en barco entre dos continentes. (Ya reservado con cena el 22.)'},
-    {n:'Cisterna Basílica',d:'Cisterna romana subterránea. ~37 €. Reservar para evitar cola (slot tarde/noche).'},
-    {n:'Mezquita Azul',d:'Gratis. Cubrir hombros/rodillas; pañuelo. Cerrada en horario de rezo.'},
-    {n:'Palacio de Topkapı',d:'Palacio otomano + Harén. Mañana entera.'},
-    {n:'Gran Bazar y Bazar Egipcio',d:'Compras y regateo. El Gran Bazar cierra los domingos.'},
-    {n:'Torre de Gálata',d:'~30 €. Vistas 360°. Mejor al atardecer.'},
+    {n:'Crucero por el Bósforo',img:'act_bosforo',d:'Paseo en barco entre dos continentes. (Ya reservado con cena el 22.)'},
+    {n:'Cisterna Basílica',img:'act_cisterna',d:'Cisterna romana subterránea. ~37 €. Reservar para evitar cola (slot tarde/noche).'},
+    {n:'Mezquita Azul',img:'act_mezquita',d:'Gratis. Cubrir hombros/rodillas; pañuelo. Cerrada en horario de rezo.'},
+    {n:'Palacio de Topkapı',img:'act_topkapi',d:'Palacio otomano + Harén. Mañana entera.'},
+    {n:'Gran Bazar y Bazar Egipcio',img:'act_granbazar',d:'Compras y regateo. El Gran Bazar cierra los domingos.'},
+    {n:'Torre de Gálata',img:'act_galata',d:'~30 €. Vistas 360°. Mejor al atardecer.'},
   ],
   'Capadocia':[
-    {n:'Globo al amanecer',d:'Lo más icónico. ~125 €/pax. (Reservado.) Sale ~05:00. Lleva abrigo.'},
-    {n:'Museo al aire libre de Göreme',d:'Iglesias rupestres con frescos. Patrimonio UNESCO.'},
-    {n:'Valles',d:'Rojo y Rosa (atardecer), del Amor, de las Palomas. A pie o en quad.'},
-    {n:'Ciudades subterráneas',d:'Derinkuyu o Kaymaklı. Varios niveles bajo tierra.'},
-    {n:'Uçhisar',d:'Castillo natural, el punto más alto. Vistas de toda Capadocia.'},
+    {n:'Globo al amanecer',img:'act_globo',d:'Lo más icónico. ~125 €/pax. (Reservado.) Sale ~05:00. Lleva abrigo.'},
+    {n:'Museo al aire libre de Göreme',img:'act_goreme',d:'Iglesias rupestres con frescos. Patrimonio UNESCO.'},
+    {n:'Valles',img:'act_valles',d:'Rojo y Rosa (atardecer), del Amor, de las Palomas. A pie o en quad.'},
+    {n:'Ciudades subterráneas',img:'act_subterranea',d:'Derinkuyu o Kaymaklı. Varios niveles bajo tierra.'},
+    {n:'Uçhisar',img:'act_uchisar',d:'Castillo natural, el punto más alto. Vistas de toda Capadocia.'},
   ],
   'Atenas':[
-    {n:'Acrópolis y Partenón',d:'Imprescindible. (Reservado el 28, 11:00.) Lleva agua y gorra.'},
-    {n:'Museo de la Acrópolis',d:'Moderno, junto a la colina. Imprescindible.'},
-    {n:'Ágora antigua y Plaka',d:'Barrio histórico, calles peatonales y tabernas.'},
-    {n:'Colina del Licabeto',d:'La vista más alta de la ciudad. Atardecer.'},
-    {n:'Cabo Sunión (opcional)',d:'Templo de Poseidón al atardecer. Excursión de medio día.'},
+    {n:'Acrópolis y Partenón',img:'act_acropolis',d:'Imprescindible. (Reservado el 28, 11:00.) Lleva agua y gorra.'},
+    {n:'Museo de la Acrópolis',img:'act_museo',d:'Moderno, junto a la colina. Imprescindible.'},
+    {n:'Ágora antigua y Plaka',img:'act_agora',d:'Barrio histórico, calles peatonales y tabernas.'},
+    {n:'Colina del Licabeto',img:'act_licabeto',d:'La vista más alta de la ciudad. Atardecer.'},
+    {n:'Cabo Sunión (opcional)',img:'act_sunion',d:'Templo de Poseidón al atardecer. Excursión de medio día.'},
   ],
   'Naxos':[
-    {n:'La Portara',d:'Puerta de mármol del templo de Apolo. Atardecer imperdible, junto al puerto.'},
-    {n:'Playas',d:'Agios Prokopios, Agia Anna, Plaka (arena), Mikri Vigla (kitesurf).'},
-    {n:'Pueblos de montaña',d:'Halki, Apiranthos (mármol), Filoti. Interior verde.'},
-    {n:'Chora (casco antiguo)',d:'Callejuelas venecianas, castillo (Kastro), tiendas y tabernas.'},
+    {n:'La Portara',img:'act_portara',d:'Puerta de mármol del templo de Apolo. Atardecer imperdible, junto al puerto.'},
+    {n:'Playas',img:'act_playas',d:'Agios Prokopios, Agia Anna, Plaka (arena), Mikri Vigla (kitesurf).'},
+    {n:'Pueblos de montaña',img:'act_pueblos',d:'Halki, Apiranthos (mármol), Filoti. Interior verde.'},
+    {n:'Chora (casco antiguo)',img:'act_chora',d:'Callejuelas venecianas, castillo (Kastro), tiendas y tabernas.'},
   ],
 };
 const FERRIES = [
@@ -570,6 +590,7 @@ const $ = s => document.querySelector(s);
 const el = (t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;};
 const cityBadge = c => `<span class="badge-city" style="background:${CITY[c].c}">${CITY[c].n}</span>`;
 const eur = n => (n<0?'−':'')+Math.abs(n).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+const photo = (key, alt) => `<img class="ph" loading="lazy" decoding="async" src="img/${key}.jpg" alt="${alt}" onload="this.classList.add('loaded')">`;
 
 /* ============== TABS ============== */
 const TABS = [
@@ -625,16 +646,20 @@ function renderInicio(){
   const sr=el('div','stat-row');
   STATS.forEach(s=>sr.appendChild(el('div','stat',`<div class="v">${s.v}</div><div class="k">${s.k}</div>`)));
   v.appendChild(sr);
-  // route
+  // route (photo cards)
   v.appendChild(el('div','sec-title','La ruta'));
-  const rc=el('div','card flat');
   ROUTE.forEach((r,i)=>{
-    rc.appendChild(el('div','leg',
-      `<div class="dot" style="background:${CITY[r.city].c}">${i+1}</div>
-       <div class="m"><b>${r.name}</b><span>${r.desc}</span></div>
-       <div class="n">${r.days}<br>${r.nights}</div>`));
+    const card=el('div','rcard');
+    card.innerHTML=`
+      <div class="cover">${photo(r.img, r.name)}
+        <div class="ov">
+          <div class="nm"><span class="num">${i+1} · ${r.nights}</span><b>${r.name}</b></div>
+          <div class="when">${r.days}</div>
+        </div>
+      </div>
+      <div class="desc">${r.desc}</div>`;
+    v.appendChild(card);
   });
-  v.appendChild(rc);
   // next / reminders
   v.appendChild(el('div','sec-title','Lo importante de los próximos días'));
   const nc=el('div','card next');
@@ -794,7 +819,9 @@ function renderFood(){
   Object.entries(DISHES).forEach(([title,arr])=>{
     const card=el('div','card');
     card.appendChild(el('div','',`<div style="font-family:Fraunces;font-weight:700;font-size:16px;color:var(--sea);margin-bottom:8px">${title}</div>`));
-    arr.forEach(d=>card.appendChild(el('div','dish',`<b>${d.n}</b><span>${d.d}</span>`)));
+    arr.forEach(d=>card.appendChild(el('div','dish hasimg',
+      `<div class="thumb">${photo(d.img, d.n)}</div>
+       <div class="meta"><b>${d.n}</b><span>${d.d}</span></div>`)));
     v.appendChild(card);
   });
 }
@@ -864,7 +891,9 @@ function renderInfo(){
   Object.entries(ACTS).forEach(([city,arr])=>{
     const c=el('div','card');
     c.appendChild(el('div','',`<div style="font-family:Fraunces;font-weight:700;font-size:16px;color:var(--sea);margin-bottom:6px">${city}</div>`));
-    arr.forEach(a=>c.appendChild(el('div','act',`<b>${a.n}</b><p>${a.d}</p>`)));
+    arr.forEach(a=>c.appendChild(el('div','act hasimg',
+      `<div class="thumb">${photo(a.img, a.n)}</div>
+       <div class="meta"><b>${a.n}</b><p>${a.d}</p></div>`)));
     v.appendChild(c);
   });
 
@@ -898,6 +927,13 @@ renderMoney();
 renderFood();
 renderListas();
 renderInfo();
+
+/* ============== OFFLINE (service worker) ============== */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  });
+}
 </script>
 </body>
 </html>

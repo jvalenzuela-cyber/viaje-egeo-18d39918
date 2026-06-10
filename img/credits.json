@@ -1,0 +1,77 @@
+{
+  "act_valles": {
+    "title": "File:Cappadocia Chimneys Wikimedia Commons.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Cappadocia_Chimneys_Wikimedia_Commons.jpg/1280px-Cappadocia_Chimneys_Wikimedia_Commons.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File%3ACappadocia_Chimneys_Wikimedia_Commons.jpg"
+  },
+  "d_balik": {
+    "title": "Balık ekmek",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Fish_sandwich%2C_Istanbul%2C_Turkey.JPG",
+    "page": "https://en.wikipedia.org/wiki/Bal%C4%B1k_ekmek"
+  },
+  "d_iskender": {
+    "title": "İskender kebap",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/%C4%B0skender_Kebap.jpg/3840px-%C4%B0skender_Kebap.jpg",
+    "page": "https://en.wikipedia.org/wiki/%C4%B0skender_kebap"
+  },
+  "d_testi": {
+    "title": "Kebab",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Lula_kebab_2.jpg/3840px-Lula_kebab_2.jpg",
+    "page": "https://en.wikipedia.org/wiki/Kebab"
+  },
+  "d_manti": {
+    "title": "Manti (food)",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Kayseride_bir_restoranda_Kayseri_mant%C4%B1s%C4%B1_%28cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Manti_(food)"
+  },
+  "d_kofte": {
+    "title": "Kofta",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/3/38/Koofteh_tabrizi.jpg",
+    "page": "https://en.wikipedia.org/wiki/Kofta"
+  },
+  "d_simit": {
+    "title": "Simit",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/0/07/Simit-2x.JPG",
+    "page": "https://en.wikipedia.org/wiki/Simit"
+  },
+  "d_souvlaki": {
+    "title": "Souvlaki",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Souvlaki_in_Athens.JPG",
+    "page": "https://en.wikipedia.org/wiki/Souvlaki"
+  },
+  "d_moussaka": {
+    "title": "Moussaka",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/a/a8/MussakasMeMelitsanesKePatates01.JPG",
+    "page": "https://en.wikipedia.org/wiki/Moussaka"
+  },
+  "d_tzatziki": {
+    "title": "Tzatziki",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/2/23/Cacik-1.jpg",
+    "page": "https://en.wikipedia.org/wiki/Tzatziki"
+  },
+  "d_saganaki": {
+    "title": "Saganaki",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Grekiska_koket_02.jpg/3840px-Grekiska_koket_02.jpg",
+    "page": "https://en.wikipedia.org/wiki/Saganaki"
+  },
+  "act_bosforo": {
+    "title": "File:Maiden tower, Istanbul (P1100207).jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Maiden_tower%2C_Istanbul_%28P1100207%29.jpg/1280px-Maiden_tower%2C_Istanbul_%28P1100207%29.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File%3AMaiden_tower%2C_Istanbul_%28P1100207%29.jpg"
+  },
+  "act_galata": {
+    "title": "File:Istanbul Galata Tower IMG 7475 1800.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Istanbul_Galata_Tower_IMG_7475_1800.jpg/1280px-Istanbul_Galata_Tower_IMG_7475_1800.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File%3AIstanbul_Galata_Tower_IMG_7475_1800.jpg"
+  },
+  "act_museo": {
+    "title": "File:New Acropolis Museum 5.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/New_Acropolis_Museum_5.jpg/1280px-New_Acropolis_Museum_5.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File%3ANew_Acropolis_Museum_5.jpg"
+  },
+  "d_graviera": {
+    "title": "File:Kitron Naxos.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Kitron_Naxos.jpg/1280px-Kitron_Naxos.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File%3AKitron_Naxos.jpg"
+  }
+}

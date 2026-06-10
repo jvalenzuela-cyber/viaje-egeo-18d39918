@@ -243,6 +243,20 @@
   .paychk .pc span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
   .paychk .pv{text-align:right;white-space:nowrap;font-family:'Fraunces',serif;font-weight:700;font-size:14px;color:var(--bad)}
   .paychk.done .pv{color:var(--good)}
+  /* quién debe a quién (simplificado) */
+  .callout{display:flex;gap:11px;align-items:flex-start;background:rgba(7,212,161,.1);border:1px solid rgba(7,212,161,.32);border-radius:14px;padding:13px 15px;margin-bottom:12px;font-size:13.5px;color:var(--sea)}
+  .callout .ci{color:#0a9d78;flex:0 0 auto;margin-top:1px}
+  .settle{display:flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px;box-shadow:var(--shadow);margin-bottom:10px}
+  .settle .av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-family:'Fraunces';font-size:14px;color:#05323f;flex:0 0 auto}
+  .settle .ar{color:var(--muted);flex:0 0 auto;display:grid;place-items:center}
+  .settle .slbl{flex:1;min-width:0;font-size:13.5px;margin-left:3px}
+  .settle .samt{font-family:'Fraunces';font-weight:700;font-size:18px;color:var(--sea);white-space:nowrap}
+  .detail{margin-top:4px}
+  .detail-h{display:flex;align-items:center;gap:7px;cursor:pointer;color:var(--aegean);font-weight:600;font-size:13px;padding:6px 2px}
+  .detail-h .chev{transition:.25s}
+  .detail.open .detail-h .chev{transform:rotate(180deg)}
+  .detail-b{display:none;margin-top:8px}
+  .detail.open .detail-b{display:block}
 
   /* ---------- Food ---------- */
   .meal{margin-bottom:12px}
@@ -1043,29 +1057,50 @@ function renderMoney(){
     `<div class="bic">${b.ic}</div><div class="bn">${b.cat}<span>${b.n}</span></div><div class="bv">${b.v}</div>`)));
   v.appendChild(bc);
 
-  v.appendChild(el('div','sec-title','Cómo va la cuenta entre las 3'));
-  v.appendChild(el('div','sub','Saldo positivo = esa persona debe poner ese dinero. Negativo = se lo devuelven.'));
+  v.appendChild(el('div','sec-title','Quién paga a quién'));
+  // liquidación mínima: cada deudor paga a quien tiene saldo a favor
+  function settle(bal){
+    const cred=bal.filter(b=>b.saldo<0).map(b=>({name:b.name,amt:-b.saldo}));
+    const deb=bal.filter(b=>b.saldo>0).map(b=>({name:b.name,amt:b.saldo}));
+    const res=[]; let i=0,j=0;
+    while(i<deb.length && j<cred.length){
+      const m=Math.min(deb[i].amt,cred[j].amt);
+      if(m>0.005) res.push({from:deb[i].name,to:cred[j].name,amt:Math.round(m*100)/100});
+      deb[i].amt-=m; cred[j].amt-=m;
+      if(deb[i].amt<0.005)i++; if(cred[j].amt<0.005)j++;
+    }
+    return res;
+  }
   const colors={Paula:'#d39a3e',Cecilia:'#d98a6a',Javiera:'#22b4c4'};
+  const moves=settle(BALANCES);
+  const debtors=[...new Set(moves.map(m=>m.from))];
+  const recv=[...new Set(moves.map(m=>m.to))];
+  const insight = debtors.length===1
+    ? `Solo <b>${debtors[0]}</b> tiene que pagar. Con ${moves.length===1?'esta transferencia':'estas '+moves.length+' transferencias'} queda todo saldado, y ${recv.join(' y ')} no se deben nada entre ellas.`
+    : `Con estas ${moves.length} transferencias queda todo saldado.`;
+  v.appendChild(el('div','callout',`<span class="ci">${I.check}</span><div>${insight}</div>`));
+  moves.forEach(m=>{
+    v.appendChild(el('div','settle',
+      `<i class="av" style="background:${colors[m.from]||'#5d7681'}">${m.from[0]}</i>
+       <span class="ar">${I.chevR}</span>
+       <i class="av" style="background:${colors[m.to]||'#5d7681'}">${m.to[0]}</i>
+       <div class="slbl"><b>${m.from}</b> paga a <b>${m.to}</b></div>
+       <div class="samt">${eur(m.amt)}</div>`));
+  });
+  // detalle del reparto (colapsable)
+  const det=el('div','detail');
+  det.innerHTML=`<div class="detail-h">${I.chev} Ver el detalle del reparto</div><div class="detail-b"></div>`;
+  const db=det.querySelector('.detail-b');
+  db.appendChild(el('div','sub','Lo que le toca a cada una (su tercio del total) frente a lo que ya ha adelantado.'));
   BALANCES.forEach(b=>{
-    const cls=b.saldo>0?'owe':'get'; const txt=b.saldo>0?'debe poner':'le devuelven';
-    v.appendChild(el('div','balcard',
+    const cls=b.saldo>0?'owe':'get'; const txt=b.saldo>0?'tiene que poner':'recupera';
+    db.appendChild(el('div','balcard',
       `<i style="background:${colors[b.name]}">${b.name[0]}</i>
-       <div class="nm"><b>${b.name}</b><span>${b.note}</span>
-         <span style="margin-top:4px">Le toca ${b.toca} · ha puesto ${b.puesto}</span></div>
+       <div class="nm"><b>${b.name}</b><span>Le toca ${b.toca} · ha puesto ${b.puesto}</span></div>
        <div class="amt ${cls}">${eur(Math.abs(b.saldo))}<div style="font-size:10px;font-weight:600;color:var(--muted);font-family:Inter">${txt}</div></div>`));
   });
-
-  v.appendChild(el('div','sec-title','Transferencias a realizar'));
-  const trc=el('div','card');
-  TRANSFERS_MONEY.forEach(t=>{
-    trc.appendChild(el('div','transfer',
-      `<div style="flex:1"><b>${t.from}</b> <span class="ar">→</span> <b>${t.to}</b>
-        <div style="font-size:11.5px;color:var(--muted);margin-top:2px">${t.c}</div></div>
-       <div class="tamt">${t.amt}</div>`));
-  });
-  trc.appendChild(el('div','',`<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:2px solid var(--line)">
-    <b style="font-size:13px">Neto a favor de Javiera</b><span style="font-family:Fraunces;font-weight:700;font-size:18px;color:var(--good)">514,82 €</span></div>`));
-  v.appendChild(trc);
+  det.querySelector('.detail-h').onclick=()=>det.classList.toggle('open');
+  v.appendChild(det);
 
   v.appendChild(el('div','sec-title','Estado de pagos'));
   v.appendChild(el('div','sub','Marca lo que ya está pagado. Se guarda en este móvil y el resumen se recalcula solo.'));

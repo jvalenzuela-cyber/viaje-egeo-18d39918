@@ -667,7 +667,7 @@ function renderInicio(){
   bh.innerHTML=`
     <div class="bh-top"><span class="bh-lbl">Total del viaje · 3 personas</span><span class="bh-rate">${TOTALS.rate}</span></div>
     <div class="bh-clp">${TOTALS.clp_total}</div>
-    <div class="bh-eur">${TOTALS.eur_total} · estimado, imprevistos ~10% incluidos</div>
+    <div class="bh-eur">${TOTALS.eur_total} · estimado</div>
     <div class="bh-pp">Por persona <b>${TOTALS.clp_pp}</b><span class="sec">${TOTALS.eur_pp}</span></div>`;
   v.appendChild(bh);
   // route (photo cards)
@@ -775,7 +775,7 @@ function renderMoney(){
   // total
   v.appendChild(el('div','sec-title','Presupuesto total'));
   const tb=el('div','total-bar');
-  tb.innerHTML=`<div><div class="tt">Total estimado</div><small>imprevistos ~10% incluidos</small></div>
+  tb.innerHTML=`<div><div class="tt">Total estimado</div><small>3 personas · 13 días</small></div>
     <div style="text-align:right"><div class="tv">6.116 €</div><small>2.039 € por persona</small></div>`;
   v.appendChild(tb);
   // budget breakdown

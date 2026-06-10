@@ -466,8 +466,8 @@ const CITY = {
 const STATS = [ {v:'13', k:'días'}, {v:'4', k:'destinos'}, {v:'5', k:'vuelos'} ];
 /*SYNC:TOTALS*/
 const TOTALS = {
-  clp_total:'$6.385.146', eur_total:'6.116 €',
-  clp_pp:'$2.128.382', eur_pp:'2.039 €', rate:'1 € ≈ 1.044 CLP',
+  clp_total:'$6.106.398', eur_total:'5.849 €',
+  clp_pp:'$2.035.466', eur_pp:'1.950 €', rate:'1 € ≈ 1.044 CLP',
 };
 /*END:TOTALS*/
 
@@ -519,9 +519,9 @@ const ITIN = [
     tr:'Vueling VY3072 (BCN→IST)', note:'Llega a IST (lado europeo). Tarifa Fly Light. Ref MHGH3P.'},
   {date:'21/06',dow:'Domingo',city:'EST',tag:'',hotel:'Galaxy Hotel Sultanahmet',
     m:'Free tour 10:30 (Civitatis) desde Plaza de Sultanahmet (2h30, exteriores) + entrar a la Mezquita Azul (gratis)',
-    a:'Cisterna Basílica (slot de tarde) → ferry al lado asiático: Kadıköy (mercado y barrio local)',
+    a:'Ferry al lado asiático: Kadıköy (mercado y barrio local)',
     e:'Cena y ambiente en Kadıköy (p. ej. Çiya Sofrası); ferry de vuelta a Sultanahmet', tr:'A pie / tranvía T1 / ferry',
-    note:'Free tour Civitatis A39313657. Cisterna: reservar en yerebatan.com. Santa Sofía: solo por fuera (decidisteis no entrar).'},
+    note:'Free tour Civitatis A39313657. Decidisteis no entrar a Santa Sofía ni a la Cisterna (solo por fuera).'},
   {date:'22/06',dow:'Lunes',city:'EST',tag:'',hotel:'Galaxy Hotel Sultanahmet',
     m:'Mezquita de Süleymaniye (gratis, vistas al Cuerno de Oro) + Gran Bazar y Bazar Egipcio, bajando hasta Eminönü',
     a:'Ferry del Cuerno de Oro (el rojo) a Balat y Fener (casas de colores). Comer en Balat. Vuelta en ferry a Eminönü/Karaköy para el crucero',
@@ -535,25 +535,27 @@ const ITIN = [
   {date:'24/06',dow:'Miércoles',city:'CAP',tag:'',hotel:'Sato Cave Hotel',
     m:'Globo al amanecer (04:30-08:30) · desayuno y descanso en el hotel hasta ~12:00',
     a:'Descanso en las horas de calor · Rose Valley y Red Valley desde ~16:00 (fotos y cafés)',
-    e:'Atardecer en Red Valley (~20:15) · cena con vistas', tr:'Tour / quad / coche',
+    e:'Atardecer en Red Valley (~20:00) · cena con vistas en Seten (reserva por email, pendiente de confirmar)', tr:'Tour / quad / coche',
     note:'Globo reservado (Fairychimneys vía Viator). Llevar abrigo.'},
   {date:'25/06',dow:'Jueves',city:'CAP',tag:'',hotel:'Sato Cave Hotel',
-    m:'Con chófer/taxi: Kaymaklı (ciudad subterránea, 09:30-11:00) · Uçhisar Castle 11:30-13:00 (el punto más alto)',
+    m:'Kaymaklı (ciudad subterránea, 09:30-11:00) · Uçhisar Castle 11:30-13:00 (el punto más alto)',
     a:'Comida en Uçhisar · Avanos por la tarde: talleres de cerámica, compras y paseo junto al río',
-    e:'Último atardecer donde más os guste: Uçhisar, Sunset Point o la terraza del hotel', tr:'Chófer/taxi todo el día o coche de alquiler',
-    note:'Reservar el chófer/taxi con antelación (día completo, a tercios).'},
+    e:'Último atardecer donde más os guste: Uçhisar, Sunset Point o la terraza del hotel', tr:'Sin coche: tour de grupo (Green/Red) o buses+taxis',
+    note:'Kaymaklı, Uçhisar y Avanos están dispersos; sin coche lo práctico es un tour de grupo. Por resolver.'},
   {date:'26/06',dow:'Viernes',city:'ATH',tag:'LLEGADA',hotel:'Epidavros Hotel',
     m:'Mañana libre en Capadocia', a:'Vuelo Nevşehir→Atenas 15:50 (con escala)', e:'Llegada ~22:25 · traslado al hotel',
     tr:'Vuelo NAV→ATH (con escala)', note:'Confirmar localizador. Falta reservar traslado Göreme→aeropuerto.'},
   {date:'27/06',dow:'Sábado',city:'ATH',tag:'',hotel:'Epidavros Hotel',
     m:'Free tour 10:30 en español (Civitatis A39457507) desde Catedral Metropolitana, acaba en Monastiraki',
-    a:'Ágora antigua y Plaka', e:'Monastiraki, cena', tr:'Metro / a pie', note:'Entradas Acrópolis ya compradas para el 28.'},
+    a:'Ágora antigua y Plaka', e:'Cena en Psyrri (tabernas y música en vivo: Telis, Lithos o Klimataria)', tr:'Metro / a pie', note:'Entradas Acrópolis ya compradas para el 28.'},
   {date:'28/06',dow:'Domingo',city:'ATH',tag:'',hotel:'Epidavros Hotel',
     m:'Acrópolis + Partenón: entrada reservada 11:00-12:00. Agua y gorra (a esa hora pega el sol)',
-    a:'Museo de la Acrópolis (climatizado) + colina del Licabeto al atardecer', e:'Última noche en Atenas', tr:'Metro', note:''},
+    a:'Tarde libre: Plaka y Anafiotika (callejuelas con sombra) · colina del Licabeto al atardecer', e:'Cena de cumpleaños en Strofi, con vista a la Acrópolis (confirmada, ~40 €/pax)', tr:'Metro', note:''},
   {date:'29/06',dow:'Lunes',city:'NAX',tag:'LLEGADA',hotel:'Korali Garden',
-    m:'Vuelo Atenas→Naxos 08:50 · traslado', a:'Playa (Agios Prokopios / Plaka)', e:'Atardecer en la Portara',
-    tr:'Vuelo ATH→JNX + traslado', note:''},
+    m:'Vuelo ATH→Naxos 08:50 (llega ~09:35) · dejar maletas · brunch en Chora y playa de Agios Georgios (al lado)',
+    a:'Más playa de Agios Georgios / relax · check-in cuando esté listo',
+    e:'A pie a Chora: atardecer en la Portara (~20:40) · cena en Chora',
+    tr:'Vuelo ATH→JNX + traslado · todo a pie en Chora', note:''},
   {date:'30/06',dow:'Martes',city:'NAX',tag:'',hotel:'Korali Garden',
     m:'Playa / excursión en ferry (opcional)', a:'Pueblos de montaña (Halki, Apiranthos)', e:'Cena en Chora',
     tr:'Coche/scooter o ferry', note:'Ferries a Paros, Mykonos, Koufonisia o Ios (ver Info).'},
@@ -569,7 +571,6 @@ const DAY_PLACES = {
   '21/06':{mode:'walking',pts:[
     {n:'Plaza Sultanahmet',q:'Sultanahmet Square, Istanbul'},
     {n:'Mezquita Azul',q:'Sultan Ahmed Mosque, Istanbul'},
-    {n:'Cisterna Basílica',q:'Basilica Cistern, Istanbul'},
     {n:'Kadıköy (ferry)',q:'Kadikoy, Istanbul'},
   ]},
   '22/06':{mode:'walking',pts:[
@@ -598,16 +599,17 @@ const DAY_PLACES = {
     {n:'Catedral Metropolitana',q:'Metropolitan Cathedral of Athens'},
     {n:'Ágora antigua',q:'Ancient Agora of Athens'},
     {n:'Plaka',q:'Plaka, Athens'},
-    {n:'Monastiraki',q:'Monastiraki Square, Athens'},
+    {n:'Psyrri (cena)',q:'Psiri, Athens'},
   ]},
   '28/06':{mode:'walking',pts:[
     {n:'Acrópolis',q:'Acropolis of Athens'},
-    {n:'Museo de la Acrópolis',q:'Acropolis Museum, Athens'},
+    {n:'Plaka y Anafiotika',q:'Anafiotika, Athens'},
     {n:'Colina del Licabeto',q:'Mount Lycabettus, Athens'},
   ]},
-  '29/06':{mode:'driving',pts:[
-    {n:'Playa Agios Prokopios',q:'Agios Prokopios Beach, Naxos'},
+  '29/06':{mode:'walking',pts:[
+    {n:'Playa Agios Georgios',q:'Agios Georgios Beach, Naxos'},
     {n:'La Portara',q:'Portara, Naxos'},
+    {n:'Chora',q:'Naxos Chora'},
   ]},
   '30/06':{mode:'driving',pts:[
     {n:'Halki',q:'Halki, Naxos'},
@@ -639,8 +641,8 @@ const BUDGET = [
   {cat:'Vuelos',v:'1.816 €',n:'5 tramos · 3 pax · comprado',ic:I.plane},
   {cat:'Alojamiento',v:'935 €',n:'4 hoteles · 12 noches',ic:I.bed},
   {cat:'Comida y bebida',v:'1.365 €',n:'~35 €/pax/día × 13 días',ic:I.food},
-  {cat:'Transporte local',v:'473 €',n:'traslados + transporte en destino',ic:I.bus},
-  {cat:'Actividades y tours',v:'682 €',n:'entradas + crucero Bósforo',ic:I.star},
+  {cat:'Transporte local',v:'413 €',n:'traslados + transporte en destino',ic:I.bus},
+  {cat:'Actividades y tours',v:'475 €',n:'Acrópolis + Capadocia + tour de isla en Naxos + crucero',ic:I.star},
   {cat:'Globo Capadocia',v:'407 €',n:'135,72 €/pax · pagado',ic:I.sun},
   {cat:'Ferries Grecia',v:'210 €',n:'opcional · 1 excursión isla',ic:I.ship},
   {cat:'Conectividad',v:'60 €',n:'eSIM Turquía + Grecia',ic:I.globe},
@@ -667,12 +669,12 @@ const MEALS = [
   {date:'21/06',city:'Estambul (Sultanahmet + Kadıköy)',lunch:'Old Sultanahmet Cuisine (~12-15 €) o las lokantas de Hocapaşa (Kasap Osman).',dinner:'Lado asiático (Kadıköy): Çiya Sofrası (cocina anatolia) o el mercado de Kadıköy.'},
   {date:'22/06',city:'Estambul',lunch:'Kasap Osman (kebab/döner, Hocapaşa) o Bizim Lokanta.',dinner:'RESERVADO: crucero Bósforo con cena 20:30. No reservéis cena.'},
   {date:'23/06',city:'Capadocia',lunch:'Al llegar a Göreme: Dibek o Topdeck Cave (testi kebab, encárgalo al llegar).',dinner:'Rocks Terrace (azotea con vistas a los valles).'},
-  {date:'24/06',city:'Capadocia',lunch:'Tras el globo y los valles: Pumpkin Göreme o algo en Uçhisar.',dinner:'Seten Anatolian (selección Guía Michelin 2026). Reserva con antelación.'},
+  {date:'24/06',city:'Capadocia',lunch:'Tras el globo y los valles: Pumpkin Göreme o algo en Uçhisar.',dinner:'Seten Anatolian (azotea con vistas, Guía Michelin). Reserva por email enviada (24 jun 20:30, 3 pax), pendiente de confirmar.'},
   {date:'25/06',city:'Capadocia',lunch:'Almuerzo ligero en Göreme tras la ciudad subterránea.',dinner:'Topdeck Cave (en cueva, con reserva) o Dibek (edificio de 475 años).'},
   {date:'26/06',city:'Capadocia → Atenas',lunch:'Comida en Göreme antes del vuelo de las 15:50.',dinner:'Llegáis a las 22:25: cena tardía cerca del hotel (Omonia).'},
-  {date:'27/06',city:'Atenas',lunch:'El free tour acaba en Monastiraki: O Thanasis o Kostas (gyros y souvlaki).',dinner:'Plaka: Ta Platanos (1932) o The Old Tavern of Psarras (1898).'},
-  {date:'28/06',city:'Atenas',lunch:'Koukaki: Skoumbri (pescado) o una taberna de Plaka.',dinner:'Geros tou Moria o Saita (Plaka). Antes, atardecer en el Licabeto.'},
-  {date:'29/06',city:'Naxos',lunch:'Taberna de playa en Agios Prokopios o Plaka.',dinner:'Junto a la Portara: Naxos Apothecary (moderna) o Metaxi Mas. Cena con vista.'},
+  {date:'27/06',city:'Atenas (Monastiraki + Psyrri)',lunch:'El free tour acaba en Monastiraki: O Thanasis o Kostas (gyros y souvlaki).',dinner:'Psyrri: Telis (chuletas a la parrilla), Lithos (mezedopolio con música) o Klimataria (taberna desde 1927).'},
+  {date:'28/06',city:'Atenas',lunch:'Koukaki: Skoumbri (pescado) o una taberna de Plaka.',dinner:'Cumpleaños: Strofi (azotea con vista a la Acrópolis). Confirmado · 21:00 · ~40 €/pax. Antes, atardecer en el Licabeto.'},
+  {date:'29/06',city:'Naxos',lunch:'Taberna en la playa de Agios Georgios o en Chora.',dinner:'Junto a la Portara: Naxos Apothecary (moderna) o Metaxi Mas. Cena con vista.'},
   {date:'30/06',city:'Naxos',lunch:'Apiranthos: Lefteris o Stou Koutoupa (cocina naxiana).',dinner:'Chora: To Elliniko (patio de un antiguo monasterio) o Metaxi Mas.'},
   {date:'01/07',city:'Naxos',lunch:'Playa o Chora.',dinner:'Axiotissa (de la granja a la mesa, ~20 min en coche) o To Elliniko. Reserva.'},
   {date:'02/07',city:'Naxos → BCN',lunch:'Barabbas (junto al puerto, pescado y guisos) antes del aeropuerto.',dinner:'Vuelo a las 20:10.'},
@@ -703,10 +705,11 @@ const TASKS = [
   {cat:'Docs',t:'Copias/fotos de pasaportes y reservas (físico + nube)',n:'',done:false},
   {cat:'Docs',t:'Pasaporte vigente (+6 meses)',n:'Verificar los 3 pasaportes.',done:true},
   {cat:'Docs',t:'Billetes de los 5 vuelos (digital + impreso)',n:'BCN-IST MHGH3P · SAW-NAV 43B6K1 · NAV-ATH BES-31881268 · faltan ATH-JNX y JNX-BCN.',done:true},
-  {cat:'Reservas',t:'Entradas Estambul: Cisterna Basílica',n:'No entráis a Santa Sofía (solo por fuera). Mezquita Azul y Süleymaniye gratis. Cisterna: yerebatan.com, reservar para el 21.',done:false},
+  {cat:'Reservas',t:'Entradas Estambul: ninguna de pago',n:'Mezquita Azul y Süleymaniye gratis. Decidisteis no entrar a Santa Sofía, Cisterna ni Topkapı.',done:true},
   {cat:'Reservas',t:'Confirmar traslado de vuelta Göreme → aeropuerto (26 jun)',n:'Para el vuelo NAV-ATH de las 15:50.',done:false},
-  {cat:'Reservas',t:'Reservar chófer/taxi para el día 25 (Kaymaklı + Uçhisar + Avanos)',n:'Día completo, a tercios. Alternativa: coche de alquiler.',done:false},
-  {cat:'Reservas',t:'Encargar el testi kebab con antelación (cena en Göreme)',n:'Se pide con horas de antelación. Dibek o Topdeck Cave.',done:false},
+  {cat:'Reservas',t:'Resolver transporte del día 25 en Capadocia (sin coche)',n:'Kaymaklı, Uçhisar y Avanos están dispersos. Lo práctico: tour de grupo (Green/Red) o buses+taxis.',done:false},
+  {cat:'Reservas',t:'Encargar el testi kebab con antelación (cena en Göreme)',n:'Se pide con horas de antelación. Con vistas: Rocks Terrace. En cueva: Dibek o Topdeck.',done:false},
+  {cat:'Reservas',t:'Confirmar reservas de cena: Seten (24 jun) y Strofi (28 jun)',n:'Emails enviados, esperando respuesta. Si en 2-3 días no contestan, insistir o reservar alternativa.',done:false},
   {cat:'Reservas',t:'GLOBO en Capadocia (3 pax)',n:'Fairychimneys · 24 jun · pagado.',done:true},
   {cat:'Reservas',t:'Entradas Acrópolis (Atenas)',n:'28 jun 11:00-12:00 · compradas.',done:true},
   {cat:'Salud',t:'Seguro de viaje (3 pax)',n:'Recomendado.',done:false},
@@ -777,9 +780,7 @@ const EXTRAS = {
     {n:'Ortahisar',img:'x_ortahisar',d:'Castillo de roca y pueblo tranquilo, alternativa menos turística a Uçhisar.',q:'Ortahisar Castle, Cappadocia'},
   ],
   'Atenas':[
-    {n:'Anafiotika',img:'x_anafiotika',d:'Rincón de casitas blancas estilo cicládico escondido bajo la Acrópolis.',q:'Anafiotika, Athens'},
     {n:'Mercado central (Varvakios)',img:'x_varvakios',d:'Mercado de carne, pescado y especias. Auténtico y muy vivo.',q:'Varvakios Agora, Athens'},
-    {n:'Barrio de Psyrri',img:'x_psyrri',d:'Arte urbano, bares de moda y tabernas. El Atenas más alternativo.',q:'Psiri, Athens'},
     {n:'Estadio Panatenaico',img:'x_panathenaic',d:'Estadio de mármol de los primeros JJOO modernos (1896).',q:'Panathenaic Stadium, Athens'},
     {n:'Cabo Sunión',img:'act_sunion',d:'Templo de Poseidón sobre el mar al atardecer. Excursión de medio día.',q:'Cape Sounion, Temple of Poseidon'},
   ],
@@ -1145,7 +1146,7 @@ function renderMoney(){
   v.appendChild(el('div','sec-title','Presupuesto total'));
   const tb=el('div','total-bar');
   tb.innerHTML=`<div><div class="tt">Total estimado</div><small>3 personas · 13 días</small></div>
-    <div style="text-align:right"><div class="tv">6.116 €</div><small>2.039 € por persona</small></div>`;
+    <div style="text-align:right"><div class="tv">${TOTALS.eur_total}</div><small>${TOTALS.eur_pp} por persona</small></div>`;
   v.appendChild(tb);
   const bc=el('div','card');
   BUDGET.forEach(b=>bc.appendChild(el('div','bud',

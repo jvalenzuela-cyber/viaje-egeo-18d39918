@@ -269,6 +269,8 @@
   .dish:last-child{border-bottom:0}
   .dish b{display:block;font-size:13.5px}
   .dish span{font-size:12.5px;color:var(--muted)}
+  .wheretoeat{display:inline-flex;align-items:flex-start;gap:5px;margin-top:7px;font-size:12px;font-weight:600;color:var(--aegean);line-height:1.35;background:rgba(27,138,166,.08);padding:6px 10px;border-radius:9px}
+  .wheretoeat svg{flex:0 0 auto;margin-top:1px}
 
   /* ---------- Lists (check) ---------- */
   .progress{height:8px;border-radius:999px;background:rgba(10,61,82,.1);overflow:hidden;margin:6px 0 14px}
@@ -669,22 +671,22 @@ const MEALS = [
 ];
 const DISHES = {
   'Turquía · Estambul y Capadocia':[
-    {n:'Kahvaltı (desayuno turco)',img:'d_kahvalti',d:'El gran desayuno de quesos, aceitunas, huevos y mermeladas. Una experiencia en sí mismo.'},
-    {n:'Balık ekmek',img:'d_balik',d:'Bocadillo de pescado a la plancha junto al puente de Gálata. Callejero e icónico.'},
-    {n:'İskender kebab',img:'d_iskender',d:'Láminas de döner sobre pan, con salsa de tomate y yogur.'},
-    {n:'Testi kebab',img:'d_testi',d:'Guiso de carne en olla de barro sellada que se rompe en la mesa. TÍPICO de Capadocia (encárgalo con antelación).'},
-    {n:'Mantı',img:'d_manti',d:'Raviolis turcos con yogur y mantequilla de pimentón.'},
-    {n:'Köfte',img:'d_kofte',d:'Albóndigas a la brasa (las de Sultanahmet tienen fama).'},
-    {n:'Baklava y künefe',img:'d_baklava',d:'Los dulces estrella. El künefe, queso con masa kadayıf y almíbar, caliente.'},
-    {n:'Para picar',img:'d_simit',d:'Çay (té), café turco, simit, lokum y dondurma (helado elástico).'},
+    {n:'Kahvaltı (desayuno turco)',img:'d_kahvalti',d:'El gran desayuno de quesos, aceitunas, huevos y mermeladas. Una experiencia en sí mismo.',where:'Incluido en el hotel; el más famoso, Van Kahvaltı Evi (Beyoğlu)',wq:'Van Kahvaltı Evi, Istanbul'},
+    {n:'Balık ekmek',img:'d_balik',d:'Bocadillo de pescado a la plancha junto al puente de Gálata. Callejero e icónico.',where:'Puestos de Eminönü, junto al puente de Gálata',wq:'Balık Ekmek Eminönü, Istanbul'},
+    {n:'İskender kebab',img:'d_iskender',d:'Láminas de döner sobre pan, con salsa de tomate y yogur.',where:'Hamdi Restaurant (Eminönü), con vistas',wq:'Hamdi Restaurant, Istanbul'},
+    {n:'Testi kebab',img:'d_testi',d:'Guiso de carne en olla de barro sellada que se rompe en la mesa. TÍPICO de Capadocia (encárgalo con antelación).',where:'Dibek o Topdeck Cave (Göreme)',wq:'Dibek Restaurant, Göreme'},
+    {n:'Mantı',img:'d_manti',d:'Raviolis turcos con yogur y mantequilla de pimentón.',where:'Lokantas tradicionales de Sultanahmet o Göreme',wq:'manti lokanta Sultanahmet, Istanbul'},
+    {n:'Köfte',img:'d_kofte',d:'Albóndigas a la brasa (las de Sultanahmet tienen fama).',where:'Tarihi Sultanahmet Köftecisi (Selim Usta)',wq:'Tarihi Sultanahmet Köftecisi, Istanbul'},
+    {n:'Baklava y künefe',img:'d_baklava',d:'Los dulces estrella. El künefe, queso con masa kadayıf y almíbar, caliente.',where:'Hafız Mustafa 1864 o Karaköy Güllüoğlu',wq:'Hafız Mustafa 1864, Istanbul'},
+    {n:'Para picar',img:'d_simit',d:'Çay (té), café turco, simit, lokum y dondurma (helado elástico).',where:'Simit en la calle; lokum en Hacı Bekir (Eminönü, desde 1777)',wq:'Ali Muhiddin Hacı Bekir, Eminönü Istanbul'},
   ],
   'Grecia · Atenas y Naxos':[
-    {n:'Souvlaki y gyros',img:'d_souvlaki',d:'La comida callejera griega por excelencia (en Monastiraki).'},
-    {n:'Moussaka',img:'d_moussaka',d:'Pastel de berenjena, carne picada y bechamel.'},
-    {n:'Mezze de mesa',img:'d_tzatziki',d:'Tzatziki, ensalada griega (horiatiki) y dolmades.'},
-    {n:'Pulpo a la brasa y saganaki',img:'d_saganaki',d:'Queso frito. Imprescindibles junto al mar.'},
-    {n:'Especialidades de Naxos',img:'d_graviera',d:'Quesos locales (graviera, arseniko), patatas de Naxos y kítron (licor de cidra).'},
-    {n:'Dulces',img:'d_loukoumades',d:'Loukoumades (buñuelos con miel) y galaktoboureko (pastel de crema).'},
+    {n:'Souvlaki y gyros',img:'d_souvlaki',d:'La comida callejera griega por excelencia (en Monastiraki).',where:'O Thanasis o Kostas (Monastiraki)',wq:'O Thanasis Monastiraki, Athens'},
+    {n:'Moussaka',img:'d_moussaka',d:'Pastel de berenjena, carne picada y bechamel.',where:'Ta Platanos o cualquier taberna de Plaka',wq:'Ta Platanos taverna Plaka, Athens'},
+    {n:'Mezze de mesa',img:'d_tzatziki',d:'Tzatziki, ensalada griega (horiatiki) y dolmades.',where:'Mezedopoleios de Psyrri o Plaka',wq:'mezedopoleio Psyrri, Athens'},
+    {n:'Pulpo a la brasa y saganaki',img:'d_saganaki',d:'Queso frito. Imprescindibles junto al mar.',where:'Metaxi Mas o tabernas del puerto (Naxos)',wq:'Metaxi Mas, Naxos'},
+    {n:'Especialidades de Naxos',img:'d_graviera',d:'Quesos locales (graviera, arseniko), patatas de Naxos y kítron (licor de cidra).',where:'Destilería Vallindras (Halki); quesos en Chora',wq:'Vallindras Distillery, Halki Naxos'},
+    {n:'Dulces',img:'d_loukoumades',d:'Loukoumades (buñuelos con miel) y galaktoboureko (pastel de crema).',where:'Lukumades o Krinos (centro de Atenas)',wq:'Krinos loukoumades, Athens'},
   ],
 };
 
@@ -1228,7 +1230,7 @@ function renderFood(){
     card.appendChild(el('div','',`<div style="font-family:Fraunces;font-weight:700;font-size:16px;color:var(--sea);margin-bottom:8px">${title}</div>`));
     arr.forEach(d=>card.appendChild(el('div','dish hasimg',
       `<div class="thumb">${photo(d.img, d.n)}</div>
-       <div class="meta"><b>${d.n}</b><span>${d.d}</span></div>`)));
+       <div class="meta"><b>${d.n}</b><span>${d.d}</span>${d.where?`<a class="wheretoeat" href="${mapsUrl(d.wq)}" target="_blank" rel="noopener">${I.pin} ${d.where}</a>`:''}</div>`)));
     v.appendChild(card);
   });
   v.appendChild(el('div','sec-title','Dónde comer cada día'));

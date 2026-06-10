@@ -490,7 +490,7 @@ const NEXT = [
 const FLIGHTS = [
   {n:1,date:'20/06',from:'BCN',to:'IST',cityFrom:'Barcelona',cityTo:'Estambul',airline:'Vueling VY3072',dep:'17:15',arr:'22:00',loc:'MHGH3P',bag:'Fly Light (mano)',price:'110,67 €/pax',status:'Comprado',stop:false,note:'Directo 3h45. Llega a IST (lado europeo). Ref cliente 40-943954731 · PIN 6596.'},
   {n:2,date:'23/06',from:'SAW',to:'NAV',cityFrom:'Estambul',cityTo:'Nevşehir',airline:'AJET VF3268',dep:'07:45',arr:'09:00',loc:'43B6K1',bag:'Basic (mano)',price:'69,33 €/pax',status:'Comprado',stop:false,note:'⚠ SALE de SAW (Sabiha Gökçen, lado asiático), no de IST. Directo 1h15.'},
-  {n:3,date:'26/06',from:'NAV',to:'ATH',cityFrom:'Nevşehir',cityTo:'Atenas',airline:'Con escala (confirmar)',dep:'15:50',arr:'22:25',loc:'BES-31881268',bag:'verificar',price:'162,33 €/pax',status:'Comprado',stop:true,note:'Con escala (~6h35). Localizador confirmado. Falta verificar escala y equipaje.'},
+  {n:3,date:'26/06',from:'NAV',to:'ATH',cityFrom:'Nevşehir',cityTo:'Atenas',airline:'Con escala en Estambul',dep:'15:50',arr:'22:25',loc:'BES-31881268',bag:'verificar',price:'162,33 €/pax',status:'Comprado',stop:true,note:'Con escala en Estambul (~6h35). Reserva BES-31881268. Confirmar equipaje.'},
   {n:4,date:'29/06',from:'ATH',to:'JNX',cityFrom:'Atenas',cityTo:'Naxos',airline:'Regional (confirmar)',dep:'08:50',arr:'09:35',loc:'por confirmar',bag:'verificar',price:'96 €/pax',status:'Comprado',stop:false,note:'Directo ~45 min. Confirmar operador y localizador.'},
   {n:5,date:'02/07',from:'JNX',to:'BCN',cityFrom:'Naxos',cityTo:'Barcelona',airline:'Con escala (confirmar)',dep:'20:10',arr:'01:00',loc:'por confirmar',bag:'verificar',price:'167 €/pax',status:'Comprado',stop:true,note:'Con escala. Sale 02/07 20:10, llega a BCN 03/07 ~01:00.'},
 ];
@@ -522,8 +522,9 @@ const ITIN = [
     a:'Sultanahmet: Mezquita Azul, Hipódromo y Cisterna Basílica (reservar slot tarde/noche, abre hasta 22:00)',
     e:'Cena en Sultanahmet', tr:'A pie / tranvía T1', note:'Free tour Civitatis A39313657. Entradas Santa Sofía/Cisterna online (webs oficiales).'},
   {date:'22/06',dow:'Lunes',city:'EST',tag:'',hotel:'Galaxy Hotel Sultanahmet',
-    m:'Palacio de Topkapı', a:'Gran Bazar y paseo por Karaköy/Gálata (vistas y atardecer)',
-    e:'Crucero Bósforo con cena 20:30 (reservado · embarque Kabataş 20:00)', tr:'Tranvía / metro / a pie',
+    m:'Mezquita de Süleymaniye (gratis, vistas al Cuerno de Oro) + Gran Bazar y Bazar Egipcio, bajando hasta Eminönü',
+    a:'Ferry del Cuerno de Oro (el rojo) a Balat y Fener (casas de colores). Comer en Balat. Vuelta en ferry a Eminönü/Karaköy para el crucero',
+    e:'Crucero Bósforo con cena 20:30 (reservado · embarque Kabataş 20:00)', tr:'Tranvía / metro / ferry / a pie',
     note:'Crucero GetYourGuide GYGN6B4QLAX3 · pagado.'},
   {date:'23/06',dow:'Martes',city:'CAP',tag:'LLEGADA',hotel:'Sato Cave Hotel',
     m:'Traslado hotel→SAW 04:30 · Vuelo SAW→Nevşehir 07:45 · traslado a Göreme',
@@ -566,9 +567,10 @@ const DAY_PLACES = {
     {n:'Cisterna Basílica',q:'Basilica Cistern, Istanbul'},
   ]},
   '22/06':{mode:'walking',pts:[
-    {n:'Palacio de Topkapı',q:'Topkapi Palace, Istanbul'},
+    {n:'Mezquita de Süleymaniye',q:'Suleymaniye Mosque, Istanbul'},
     {n:'Gran Bazar',q:'Grand Bazaar, Istanbul'},
-    {n:'Torre de Gálata',q:'Galata Tower, Istanbul'},
+    {n:'Bazar Egipcio',q:'Spice Bazaar, Istanbul'},
+    {n:'Balat y Fener',q:'Balat, Istanbul'},
     {n:'Kabataş (crucero)',q:'Kabatas, Istanbul'},
   ]},
   '23/06':{mode:'driving',pts:[
@@ -691,11 +693,11 @@ const DISHES = {
 };
 
 const TASKS = [
-  {cat:'Docs',t:'Confirmar localizadores NAV-ATH, ATH-JNX y JNX-BCN',n:'Faltan en la hoja de vuelos.',done:false},
+  {cat:'Docs',t:'Confirmar localizadores ATH-JNX y JNX-BCN',n:'NAV-ATH ya confirmado (BES-31881268). Faltan ATH-JNX y JNX-BCN.',done:false},
   {cat:'Docs',t:'Copias/fotos de pasaportes y reservas (físico + nube)',n:'',done:false},
   {cat:'Docs',t:'Pasaporte vigente (+6 meses)',n:'Verificar los 3 pasaportes.',done:true},
-  {cat:'Docs',t:'Billetes de los 5 vuelos (digital + impreso)',n:'',done:true},
-  {cat:'Reservas',t:'Entradas Estambul: Santa Sofía, Cisterna y Topkapı (con Harén)',n:'Webs oficiales (muze.gov.tr / yerebatan.com). Cisterna: reservar para el 21.',done:false},
+  {cat:'Docs',t:'Billetes de los 5 vuelos (digital + impreso)',n:'BCN-IST MHGH3P · SAW-NAV 43B6K1 · NAV-ATH BES-31881268 · faltan ATH-JNX y JNX-BCN.',done:true},
+  {cat:'Reservas',t:'Entradas Estambul: Santa Sofía y Cisterna Basílica',n:'Mezquita Azul y Süleymaniye gratis. Webs oficiales (muze.gov.tr / yerebatan.com). Cisterna: reservar para el 21.',done:false},
   {cat:'Reservas',t:'Confirmar traslado de vuelta Göreme → aeropuerto (26 jun)',n:'Para el vuelo NAV-ATH de las 15:50.',done:false},
   {cat:'Reservas',t:'GLOBO en Capadocia (3 pax)',n:'Fairychimneys · 24 jun · pagado.',done:true},
   {cat:'Reservas',t:'Entradas Acrópolis (Atenas)',n:'28 jun 11:00-12:00 · compradas.',done:true},
@@ -757,9 +759,8 @@ const CLIMATE = {
 /* EXTRAS: lugares complementarios que NO están en el plan (ideas si sobra tiempo) */
 const EXTRAS = {
   'Estambul':[
-    {n:'Balat y Fener',img:'x_balat',d:'Barrios de casas de colores y calles fotogénicas, junto al Cuerno de Oro.',q:'Balat, Istanbul'},
-    {n:'Mezquita de Süleymaniye',img:'x_suleymaniye',d:'La más bella de la ciudad, con terrazas y vistas; mucho menos turística.',q:'Suleymaniye Mosque, Istanbul'},
-    {n:'Bazar de las Especias',img:'x_spice',d:'Colores y aromas junto a Eminönü. Más pequeño y manejable que el Gran Bazar.',q:'Spice Bazaar, Istanbul'},
+    {n:'Palacio de Topkapı',img:'act_topkapi',d:'Palacio otomano y Harén. Quedó fuera del plan, pero si te sobra una mañana merece mucho la pena.',q:'Topkapi Palace, Istanbul'},
+    {n:'Torre de Gálata',img:'act_galata',d:'Vistas 360° de la ciudad, mejor al atardecer. ~30 €.',q:'Galata Tower, Istanbul'},
     {n:'Kadıköy (lado asiático)',img:'x_kadikoy',d:'Mercado, cafés y ambiente local. Se cruza en ferry, una experiencia en sí.',q:'Kadikoy, Istanbul'},
     {n:'İstiklal y Beyoğlu',img:'x_istiklal',d:'Avenida peatonal con el tranvía rojo, tiendas y vida nocturna.',q:'Istiklal Avenue, Istanbul'},
   ],

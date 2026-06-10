@@ -1,6 +1,6 @@
 /* Service worker — offline en destino, pero siempre la última versión si hay conexión.
    Estrategia: HTML network-first (refresca al regenerar la app); imágenes/estáticos cache-first. */
-const VERSION = 'v2';
+const VERSION = 'v3';
 const CACHE = 'viaje-egeo-' + VERSION;
 const IMG_KEYS = [
   'est_hero','cap_hero','ath_hero','nax_hero',

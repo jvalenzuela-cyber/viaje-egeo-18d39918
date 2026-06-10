@@ -272,6 +272,7 @@
       <h1 id="headTitle">Estambul · Capadocia<br>Atenas · Naxos</h1>
     </div>
     <div class="count">
+      <div class="lbl" id="cdPre">faltan</div>
       <div class="num" id="cdNum">–</div>
       <div class="lbl" id="cdLbl">días</div>
     </div>
@@ -635,11 +636,12 @@ function countdown(){
   const dep=new Date(TRIP.start+'T00:00:00');
   const back=new Date(TRIP.end+'T23:59:59');
   const diff=Math.round((dep-now)/86400000);
-  const num=$('#cdNum'), lbl=$('#cdLbl');
-  if(now>=dep && now<=back){ num.textContent='✈'; lbl.textContent='¡en ruta!'; }
-  else if(diff>0){ num.textContent=diff; lbl.textContent=diff===1?'día':'días'; }
-  else if(diff===0){ num.textContent='¡Hoy!'; num.style.fontSize='17px'; lbl.textContent='salida'; }
-  else { num.textContent='♥'; lbl.textContent='vuelta'; }
+  const num=$('#cdNum'), lbl=$('#cdLbl'), pre=$('#cdPre');
+  const setPre = t => { pre.textContent=t; pre.style.display=t?'block':'none'; };
+  if(now>=dep && now<=back){ setPre(''); num.textContent='✈'; lbl.textContent='¡en ruta!'; }
+  else if(diff>0){ setPre('faltan'); num.textContent=diff; lbl.textContent=diff===1?'día':'días'; }
+  else if(diff===0){ setPre(''); num.textContent='¡Hoy!'; num.style.fontSize='17px'; lbl.textContent='salida'; }
+  else { setPre(''); num.textContent='♥'; lbl.textContent='vuelta'; }
 }
 countdown();
 
